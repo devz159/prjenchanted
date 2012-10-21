@@ -295,7 +295,12 @@ class Panel extends CI_Controller {
 			// preps data
 			$offline = (strtolower($this->input->post('offline') == 'offline') ? '1' : '0');
 			$strQry = sprintf("UPDATE settings SET `value`='%d' WHERE setting LIKE '%csiteoffline%c'", $offline, 37,37);
-			$this->db->query($strQry);			
+			$this->db->query($strQry);
+			
+			// show affiliate program on business profile page.
+			$showadsonbusprofpage = ($this->input->post('showaffiliateprogram')) ? '1' : '0';
+			$strQry = sprintf("UPDATE settings SET `value`='%s' WHERE setting LIKE '%cshowaffiliateprogram%c'", $showadsonbusprofpage, 37,37);
+			$this->db->query($strQry);
 			
 			$this->_updatedsettings();
 			

@@ -78,8 +78,9 @@
              <label for="offline"><input type="radio" id="offline" name="offline" value="offline" <?php echo ($mSettings['siteoffline'] == '1') ? 'checked="checked"' : '' ?> />Yes</label><label for="online"><input type="radio" id="online" name="offline" value="online" <?php echo ($mSettings['siteoffline'] == '0') ? 'checked="checked"' : '' ;?> />No</label>
         </fieldset>
     <p><label>Site Offline Message</label><br /><textarea class="generalsettings" name="offlinemsg"><?php echo $mSettings['offlinemsg']; ?></textarea></p>
-    
-    <p><input class="submitbtn" type="submit" value="Save Settings" /></p>
+ <fieldset><legend>Affiliate Program</legend><label for="showaffiliateprogram">Show on business profile page<input id="showaffiliateprogram" <?php echo ($mSettings['showaffiliateprogram'] == '1') ? 'checked="checked"' : '' ?> type="checkbox" name="showaffiliateprogram" value="1" /></label>
+</fieldset>
+<p><input class="submitbtn" type="submit" value="Save Settings" /></p>
 <div class="clearthis"></div>
 
 <?php echo form_close(); ?>                    
