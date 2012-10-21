@@ -12,7 +12,6 @@ class My extends CI_Controller {
 		$this->_mUserName = null;
 		$this->_mFullName = null;
 		$this->_mRowCount;
-				
 	}
 	
 	public function index() {
@@ -521,7 +520,7 @@ class My extends CI_Controller {
 			return FALSE;
 		
 		// updates the new password
-		$strQry = sprintf("UPDATE advertiser SET password = MD5(%s) WHERE ad_id=%d", $this->input->post('newpword'), $userid);
+		$strQry = sprintf("UPDATE advertiser SET password='%s' WHERE ad_id=%d", md5($this->input->post('newpword')), $userid);
 		
 		if(! $this->db->query($strQry))
 			return FALSE;
