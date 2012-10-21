@@ -233,7 +233,7 @@ class Panel extends CI_Controller {
 		
 		$data['advertisersCount'] = $this->_getOLAdvertiser();
 		$data['webAdminCount'] = $this->_getWebAdmin();
-		$data['superadmin'] = '';//$this->_isSuperAdmin();
+		$data['superadmin'] = $this->_isSuperAdmin();
 		
 		$data['main_content'] = 'admin/emails/emails_view';
 		$this->load->view('includes/admin/template', $data);
