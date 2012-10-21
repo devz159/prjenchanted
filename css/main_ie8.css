@@ -1,0 +1,11 @@
+/* CSS Document */
+
+/* login menu */
+#loginmenu li.lastchild a {border-right:none;}
+
+/* search */
+.search input {margin-left:1.5em; width:13em;}
+.searchbtnone {min-height: 36px; padding:0;}
+
+/* footer */
+#footer .ftrLeft .sitelinks ul li.lastchild {border-right:none;}

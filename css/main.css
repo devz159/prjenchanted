@@ -1,0 +1,136 @@
+/* CSS Document */
+/*
+ | ------------------------------------------------------------------------------------------
+ | This is the main stylesheet for this site: http://casinojobs.com
+ | ------------------------------------------------------------------------------------------
+ |
+ | @Author		:		Kenneth "digiArtist" Vallejos
+ | @Created		:		Tuesday, May 1, 2012
+ | @Modified	:		-----
+ |
+ |
+ */
+
+/* resets all default */
+body, div, p, h1, h2, h3, h4, h5, h6, ul, li {margin:0; padding:0; font-family:Arial, Helvetica, sans-serif;}
+a img {border:none;}
+
+/* new default values */
+h1, h2{color: #027373; font-family:Georgia, "Times New Roman", Times, serif; margin:2em 0 1em 0;}
+h1 {font-size:22px; font-weight:normal;}
+h2 {font-size:18px; font-weight:normal;}
+h3 {color:#999; font:bold 14px/1.65em "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
+p {color:#999; font:normal 12px/1.65em "Lucida Sans Unicode", "Lucida Grande", sans-serif; margin:.5em 0 1.25em 0;}
+
+/* generic of clearing floats */
+.clearthis {clear:both;}
+
+.sprite {background:url(../images/common_sprite.png);}
+
+ul {list-style-type:none; }
+
+/* header */
+#header {background:#0d0d0d; margin:0; padding:0; }
+
+#comlogo {float:left; margin-top:10px;}
+.menucontainer {float:left; margin-left:2em;}
+.loginmenucontainer {float:right; margin-top:1em;}
+#loginmenu li {float:left;}
+#loginmenu li a {border-right:1px solid #6d6d6d;}
+#loginmenu li:last-child a, #loginmenu li.lastchild a {border-right:none;}
+#loginmenu li a:link, #loginmenu li a:visited {color: #6d6d6d; font-size:11px; padding:0 .5em; text-decoration:none;}
+#loginmenu li a:hover {color:#989797;}
+
+/* menu */
+#menu li a, #menu li {background:#0d0d0d; float:left;}
+#menu li {position:relative;}
+#menu li a {color:#ebd01d; text-decoration:none; padding:1em 0.75em}
+#menu li a:hover {color:#f66f1b;}
+
+/* submenu */
+#menu li ul {display:none; margin:0; padding:0; left:5%; position:absolute; top:100%;}
+#menu li:hover ul {display:block;}
+#menu li ul li, #menu li ul li a {float:none;}
+#menu li ul li { _display: inline;} /* for IE6*/
+#menu li ul li a:hover {background:#2b2b2b;}
+#menu li ul li a {display:block; width:150px;}
+
+.middle {margin:auto; width:1020px;}
+
+/* left */
+#left {float:left; width: 350px;}
+
+/* search */
+.module.search {width:315px;}
+.search p {margin:0;}
+.search input {border:1px solid #ccc; color:#999; margin-left:1em; -moz-border-radius:5px; border-radius:5px; padding:.75em; width:15em;}
+.searchbtnone {
+	background-color: #e5e5e5;
+background: -moz-linear-gradient(top, #e5e5e5, #fff);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(top, #e5e5e5, #fff);
+min-height:46px; min-width:64px;
+color:#f25d27;
+cursor:pointer;
+font: bold 14px "Trebuchet MS", arial, sans-serif;
+-moz-border-radius: 5px 5px;
+border-radius: 5px;
+}
+.searchbtnone:hover {
+	background-color: #fff;
+	background: -moz-linear-gradient(top, #fff, #e5e5e5);
+	/* Safari 5.1, Chrome 10+ */ 
+	background: -webkit-linear-gradient(top, #fff, #e5e5e5);
+	}
+
+a:link.advancesearch, a:visited.advancesearch {color:#999; font:bold 12px "Trebuchet MS", arial, sans-serif; margin-left:2em; text-decoration:none;}
+a:hover.advancesearch {text-decoration:underline;}
+
+/* directory */
+.module.directorylisting {width:315px;}
+.directorylisting .directoryitembox {float:left; padding:.5em;}
+
+/* car & house rental */
+.module.carrentals, .module.houserentals {width:315px;}
+.module.carrentals .carrentalsbox, .module.houserentals .houserentalsbox {margin-left:1em;}
+
+/* content */
+#container {float: right; width:670px;}
+#container h3 a {color:#999; text-decoration:none;}
+#container h3 a:hover {color:#000;}
+#container .viewmore {padding-right:2em; text-align:right;}
+#container .viewmore a:link, #container .viewmore a:visited {font:normal 14px "Trebuchet MS", arial, sans-serif; color:#f25d27;}
+#container .viewmore a:hover {text-decoration:none;}
+
+p.description {margin:1.25em 2em;}
+.listbox {margin-left:15px; width: 640px; overflow:auto;}
+.listbox .itembox {float:left; margin:0px; padding:5px; width:305px;}
+.listbox .itembox .imgbox {float: left;}
+.listbox .itembox .descriptionbox {float:right;}
+.listbox .itembox .imgbox {width:90px;}
+.listbox .itembox .descriptionbox {width:200px;}
+
+
+/* footer */
+#footer {background:#0d0d0d; clear: both; min-height:168px; padding:2em 0 0 0;}
+#footer p {color:#fff;}
+#footer .ftrLeft {float:left; width:45%; text-transform:uppercase; overflow:auto;}
+#footer .ftrLeft .copyright p {font:normal 14px "Trebuchet MS", arial, sans-serif;}
+#footer .ftrLeft .sitelinks ul li {border-right:1px dotted #787878; display:inline;}
+#footer .ftrLeft .sitelinks ul li:last-child, #footer .ftrLeft .sitelinks ul li.lastchild {border-right:none;}
+#footer .ftrLeft .sitelinks ul li a:link, #footer .ftrLeft .sitelinks ul li a:visited {color:#787878; font:normal 14px "Trebuchet MS", arial, sans-serif; text-decoration:none; padding:0 .5em;}
+#footer .ftrLeft .sitelinks ul li:first-child a, #footer .ftrLeft .sitelinks ul li.firstchild a {padding-left:0;}
+#footer .ftrLeft .sitelinks ul li a:hover {color:#a1a1a1;}
+#footer .ftrLeft .developer p a:link, #footer .ftrLeft .developer p a:visited {color:#857610; font: normal 10px"Trebuchet MS", arial, sans-serif; text-transform:capitalize; text-decoration:none;}
+#footer .ftrLeft .developer p a:hover {text-decoration:underline;}
+#footer .ftrRight {float:right; widt:45%;}
+#footer .ftrRight .feedcontainer {margin-top:2em;}
+#footer .ftrRight .feedcontainer a:link, #footer .ftrRight .feedcontainer a:visited {color:#fff; font:14px "Trebuchet MS", arial, sans-serif; text-decoration:none;}
+#footer .ftrRight .feedcontainer a:hover {color:#999;}
+#footer .ftrRight .feed {background-position:-80px -148px; display:block; float:left; height:54px; margin-top:-2em; width:55px;}
+
+.calltoaction {float:right; margin:1em 1em 2.5em 1em;}
+/* some controls and images */
+a.ctabox {background-position: -24px -79px; color:#fff; display:block; float:left; font:22px georgia, "Times New Roman", Helvetica, serif; padding:15px 30px 15px 20px; text-decoration:none;}
+a.ctabox span {background-position:-47px -150px; display:block; float:left; height:12px; margin: 8px 5px 0 0; width:13px;}
+a:hover {color:#973101;}

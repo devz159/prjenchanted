@@ -1,0 +1,198 @@
+/* CSS Document */
+/*
+ | ------------------------------------------------------------------------------------------
+ | This is the main stylesheet for this site: http://casinojobs.com
+ | ------------------------------------------------------------------------------------------
+ |
+ | @Author		:		Kenneth "digiArtist" Vallejos
+ | @Created		:		Friday, May 4, 2012
+ | @Modified	:		-----
+ |
+ |
+ */
+
+/* resets all default */
+body, div, p, h1, h2, h3, h4, h5, h6, ul, li {margin:0; padding:0; font-family:"Trebuchet MS", "Lucida Sans Unicode", arial, sans-serif;}
+a img {border:none;}
+
+/* new default values */
+h1, h2{color: #027373; font-family:Georgia, "Times New Roman", Times, serif; margin:2em 0 1em 0;}
+h1 {font-size:22px; font-weight:normal;}
+h2 {font-size:18px; font-weight:normal;}
+h3 {color:#999; font:bold 14px/1.65em "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
+p, fieldset {color:#999; font:normal 12px/1.65em "Lucida Sans Unicode", "Lucida Grande", sans-serif; margin:.5em 0 1.25em 0;}
+
+/* generic of clearing floats */
+.clearthis {clear:both;}
+
+.sprite {background:url(../../images/common_sprite.png);}
+.strong {font-weight:bold;}
+.black {color:#0d0d0d;}
+.grey {color:#999;}
+.error {color:#ac1414; margin-left:.5em; font-size:.9em;}
+.sidenote {font-size:10px;}
+/* tooltip box */
+.hide {display:none;}
+.tooltipbox {background:#0079af; border:1px solid #005c85; border-radius:5px; color:#ffdf03; filter: alpha(opacity = 85); font:normal 10px "Trebuchet MS", arial, tahoma, sans-serif; opacity: .85; padding:5px; position:absolute; z-index:9999; -moz-border-radius:5px; -webkit-border-radius:5px;}
+
+ul {list-style-type:none; }
+
+/* header */
+#header {background:#444444; margin:0; padding:0;}
+
+#comlogo {float:left; margin-top:10px;}
+.middle {margin:auto; width:1020px;}
+
+/* online users */
+.usericon {float:right; margin-top:10px;}
+.usericon ul li {color:#d5c129; display:inline; font:normal 10px "Trebuchet MS", arial, tahoma, sans-serif; margin-right:8px;  padding-left:17px; position:relative; }
+.usericon ul li img {position:absolute; left:0; top:0;}
+.usericon ul li .advricon {background-position:-169px -779px;}
+.usericon ul li .admnicon {background-position:-124px -779px;}
+
+/* profile login menu */
+.profloginmenu {float:right;}
+.profloginmenu ul {padding-top:0;}
+.profloginmenu li {position:relative;}
+.profloginmenu li , .profloginmenu li a {z-index:9999;}
+.profloginmenu ul li a, .profloginmenu ul li {float:left; font-size:14px;}
+.profloginmenu ul li a {color:#fff; text-decoration:none;}
+.profloginmenu li a:hover {color:#f66f1b;}
+.profloginmenu li.accntmenu a {background-position:-35px -430px; border-left:1px dotted #ccc;  border-right:1px dotted #ccc; display:block; padding:.95em 2em .95em 1.5em;}
+.profloginmenu li.accntmenu a span {background-position: -119px -411px; float:left; height:21px; margin:0 2px 0 0; width:21px;}
+
+/* profile login sub-menu */
+.profloginmenu li ul { border-radius:0 0 10px 10px; padding-bottom:.5em;}
+.profloginmenu li ul {background:#444; display:none; position:absolute; top:100%; left:0;}
+.profloginmenu li:hover ul {display:block;}
+.profloginmenu li ul li, .profloginmenu li ul li a {float:none;}
+.profloginmenu li ul li a {border:none; display:block; font-size:12px; padding:.25em 1em .25em 3.5em !important; width:120px;}
+.profloginmenu li ul li.accntsubmenu a {background:#444; border:none;}
+.profloginmenu li ul li.accntsubmenu a:hover {background:#4d4d4d;}
+
+
+/* left */
+#left {float:left; margin-top:2em; width:220px;}
+
+/* sidebar menu */
+.sidebarmainmenu {clear:both;}
+.sidebarmainmenu ul {border-bottom:1px solid #ccc; border-left:1px solid #ccc; border-top:1px solid #ccc; border-right:none;}
+.sidebarmainmenu ul li a {
+	background-color: #e5e5e5;
+background: -moz-linear-gradient(bottom, #e5e5e5, #f2f2f2);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(bottom, #e5e5e5, #f2f2f2);
+border-bottom:1px solid #ccc; color:#1d78aa; display:block; font-size:14px; font-weight:bold; padding:.5em .5em .5em 2.5em; text-decoration:none;}
+
+.sidebarmainmenu ul li.selected a {background:#707070;
+background: -moz-linear-gradient(bottom, #707070, #808080);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(bottom, #707070, #808080);
+color:#fff; position:relative;}
+.sidebarmainmenu ul li.selected a .arrowselector {background:#707070;
+background-color: #707070;
+background: -moz-linear-gradient(bottom, #707070, #808080);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(bottom, #707070, #808080);
+height:32px; position:absolute; right:-8px; top:0px; width:17px; z-index:9000;}
+.sidebarmainmenu ul li.selected a .arrowselector div {background-position:-105px -562px; height:32px; right:-5px; position:absolute; top:0px; width:12px; z-index:9960;}
+
+/* sidebarmainmenu submenu */
+.sidebarmainmenu {margin-top:2.5em;}
+.sidebarmainmenu ul li.selected ul {display:block;}
+.sidebarmainmenu ul li ul {border:none; display:none; /*margin-left:1em;*/}
+.sidebarmainmenu ul li ul li a {background:none; border:none; font-size:12px; font-weight:normal; padding-left:4em;}
+.sidebarmainmenu ul li.selected ul li a {background:#fff; color:#1d78aa;}
+.sidebarmainmenu ul li ul li a:hover {background:#f2f2f2;}
+
+.sidebarmenu {float:right;}
+.sidebarmenu ul li a {color:#0d0d0d; display:block; padding:1em 12em 1em 2.5em; text-decoration:none;}
+.sidebarmenu ul li a {border-right:none;}
+.sidebarmenu ul li a:hover {background:#f2f2f2; color:#b8390c;}
+.sidebarmainmenu ul li.selected ul li.selectedsubmenu a {color:#145477; font-weight:bold;}
+
+/* content */
+#container {float: right; margin-top:2em; width:800px;}
+#container .pane {border:2px solid #ccc; border-radius:10px; min-height:550px; -moz-border-radius:10px; -webkit-border-radius:10px; position:relative;}
+
+/* innercontent */
+#container .innercontent {padding:.5em 1.5em;}
+.toolbar .titlebar {float:left;}
+.toolbar .titlebar h1 {color:#444; font:normal 22px "Trebuchet MS", arial, sans-serif; margin:1em 0 0.5em 0;}
+
+.toolbar .actionbutton {float:left; margin:1em;}
+.toolbar .actionbutton a {border:1px solid #ccc; border-radius: 15px; color:#218ac4; display:block; font-size:12px; -moz-border-radius: 15px; padding:.5em 1em; text-decoration:none; -webkit-border-radius:15px;}
+.toolbar .actionbutton a:hover {color:#aa0d14;}
+
+.toolbar .extrabutton {float:right;}
+
+/* forms */
+.innercontent form {padding-left:1em;}
+.innercontent form p label {display:block; float:left; padding:.5em; width:10em;}
+.innercontent form p input {padding:.5em; width:15em;}
+.innercontent form p input.submitbtn {margin-left:10em;padding:.25em; width:8em;}
+.runninglist {clear:both;}
+.runninglist table {border:1px solid #ccc; font-size:12px; -moz-border-radius:5px; -webkit-border-radius:5px; width:100%;}
+.runninglist table thead tr th {background:#e5e5e5;
+background: -moz-linear-gradient(bottom, #e5e5e5, #f2f2f2);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(bottom, #e5e5e5, #f2f2f2);
+font-weight:bold;
+padding:.5em;
+}
+.innercontent form fieldset {border:none; margin:0;}
+.innercontent form fieldset label {display:block; margin-left:10em; width:20em;}
+.innercontent form textarea.generalsettings {height:10em; width:25em;}
+/* exception from generic form format */
+/*.innercontent form p.xgenericform label {float:none; width:auto;}
+.innercontent form p.xgenericform input {width:auto;}*/
+
+/* pagination */
+.pagination {float:right; margin:1em 1em 0;}
+.pagination a {background:#ebebeb; border-radius:4px; font-size:11px; font-weight:normal; padding:.125em .25em; text-decoration:none; }
+.pagination a:link, .pagination a:visited {color:#7a7a7a;}
+.pagination strong {font-size:11px;}
+
+.runninglist table tbody tr td {padding:.5em; color:#1d78aa;}
+.runninglist table tbody tr:hover td {background:#f2f2f2; cursor:pointer;}
+.runninglist table tbody tr td:first-child {padding-left:1.5em;}
+.runninglist table tbody tr td a {color:#aa0d14;}
+.runninglist table tbody tr td a:hover {text-decoration:none;}
+.runninglist table tbody tr td span {color:#aa0d14;}
+
+.runninglist .bulkaction {float:left; margin:1em 0 1em 1em; width:17%;}
+.runninglist .applybutton {float:left; margin:.5em 1em;}
+.runninglist .applybutton a {border:1px solid #ccc; border-radius:15px; color:#0d0d0d; display:block; font-size:12px; -moz-border-radius: 15px; padding:.5em 1em; text-decoration:none; -webkit-border-radius:15px;}
+.runninglist .applybutton a:hover {color:#218ac4;}
+
+/* new article */
+.texteditor {clear:both; position:relative;}
+.texteditor .articletitle {border:1px solid #ccc; border-radius:5px; color:#000; font-size:22px; -moz-border-radius:5px; padding:.5em; -webkit-border-radius:5px; width:20em;}
+
+.utilitybar {width:210px;}
+.texteditor .utilitybar {position:absolute; right:5px; top:5px;}
+.texteditor .utilitybar .publishbtn {background:#e5e5e5;
+background: -moz-linear-gradient(bottom, #e5e5e5, #f2f2f2);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(bottom, #e5e5e5, #f2f2f2); border:1px solid #ccc; border-radius: 15px; color:#218ac4; font-family:"Trebuchet MS", arial, sans-serif; font-weight:bold;  -moz-border-radius:15px; padding:.5em 1em;-webkit-border-radius:15px; width:15em;}
+.texteditor .utilitybar .publishbtn:hover {color:#aa0d14;}
+
+.texteditor .utilitybar .savedraftbtn {background:#e5e5e5;
+background: -moz-linear-gradient(bottom, #e5e5e5, #f2f2f2);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(bottom, #e5e5e5, #f2f2f2); border:1px solid #ccc; border-radius: 15px; color:#0d0d0d; font-family:"Trebuchet MS", arial, sans-serif; font-weight:normal; padding:.5em 1em; -moz-border-radius:15px; -webkit-border-radius:15px; width:15em;}
+.texteditor .utilitybar .savedraftbtn:hover {font-weight:bold;}
+.texteditor .utilitybar div h3 {color:#0d0d0d; font:normal 16px "Trebuchet MS", arial, sans-serif;}
+.texteditor .utilitybar div p {margin-left:1em;}
+.texteditor .utilitybar div p label {color:#0d0d0d;}
+.texteditor .utilitybar div p textarea {height:5em;}
+
+/* footer */
+#footer {background:#fff;
+background: -moz-linear-gradient(top, #e5e5e5, #fff);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(top, #e5e5e5, #fff);
+ border-top:2px solid #e5e5e5; clear: both; min-height:25px;}
+#footer p {color:#838383; margin-top:1em;}
+
+

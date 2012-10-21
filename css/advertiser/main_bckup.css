@@ -1,0 +1,420 @@
+/* CSS Document */
+/*
+ | ------------------------------------------------------------------------------------------
+ | This is the main stylesheet for this site: http://casinojobs.com
+ | ------------------------------------------------------------------------------------------
+ |
+ | @Author		:		Kenneth "digiArtist" Vallejos
+ | @Created		:		Friday, May 4, 2012
+ | @Modified	:		-----
+ |
+ |
+ */
+
+/* resets all default */
+body, div, p, h1, h2, h3, h4, h5, h6, ul, li {margin:0; padding:0; font-family:"Trebuchet MS", "Lucida Sans Unicode", arial, sans-serif;}
+a img {border:none;}
+
+/* new default values */
+h1, h2{color: #027373; font-family:Georgia, "Times New Roman", Times, serif; margin:2em 0 1em 0;}
+h1 {font-size:22px; font-weight:normal;}
+h2 {font-size:18px; font-weight:normal;}
+h3 {color:#999; font:bold 14px/1.65em "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
+p {color:#999; font:normal 12px/1.65em "Lucida Sans Unicode", "Lucida Grande", sans-serif; margin:.5em 0 1.25em 0;}
+
+/* generic of clearing floats */
+.clearthis {clear:both;}
+
+.sprite {background:url(../../images/common_sprite.png);}
+.strong {font-weight:bold;}
+.black {color:#0d0d0d;}
+.grey {color:#999;}
+
+.error {color:#a40f0f; font-size:.85em; padding-left:15px;}
+.yellow {color:#FFCC00;}
+
+ul {list-style-type:none; }
+
+/* tooltip box */
+.hide {display:none;}
+.tooltipbox {background:#0079af; border:1px solid #005c85; border-radius:5px; color:#ffdf03; filter: alpha(opacity = 85); font:normal 10px "Trebuchet MS", arial, tahoma, sans-serif; opacity: .85; padding:5px; position:absolute; z-index:9999; -moz-border-radius:5px; -webkit-border-radius:5px;}
+
+/* header */
+#header {background:#005c85/*#0d0d0d*/; margin:0; padding:0; }
+
+#comlogo {float:left; margin-top:1.25em;}
+
+.loginmenucontainer {float:right;}
+#loginmenu li {float:left;}
+#loginmenu li a {border-right:1px solid #0095d7/*#6d6d6d*/;}
+#loginmenu li:last-child a, #loginmenu li.lastchild a {border-right:none;}
+#loginmenu li a:link, #loginmenu li a:visited {color:#0095d7/* #6d6d6d*/; font-size:11px; padding:0 .5em; text-decoration:none;}
+#loginmenu li a:hover {color:#00a4ec;}
+
+/* listing logged in */
+.loggedin {float:right; margin-top:1.6em; padding-right:15px;}
+.loggedin ul {font:11px "Trebuchet MS", arial, tahoma, sans-serif;}
+.loggedin ul li strong {color:#fff;}
+.loggedin ul li a {color:#ffcc00;}
+
+
+/* teaser */
+.teaser {float:left; margin:0 0 0 2em;}
+.teaser p {color:#fbbf00;/*#ffcc00;*/ margin:2px 0;}
+.teaser.signup {margin-top:1.5em;}
+
+
+.middle {margin:auto; width:1020px;}
+
+/* left */
+#left {float:left; width: 350px;}
+
+/* search */
+.module.search {width:315px;}
+.search p {margin:0;}
+.search input {border:1px solid #ccc; color:#999; margin-left:1em; -moz-border-radius:5px; border-radius:5px; padding:.75em; width:15em;}
+.searchbtnone {background-color: #e5e5e5; background: -moz-linear-gradient(top, #e5e5e5, #fff);	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e5), to(#fff)); background: -webkit-linear-gradient(top, #e5e5e5, #fff); min-height:46px; min-width:64px; color:#f25d27; cursor:pointer; font: bold 14px "Trebuchet MS", arial, sans-serif;	-moz-border-radius: 5px 5px; border-radius: 5px;}
+.searchbtnone:hover {background-color: #fff; background: -moz-linear-gradient(top, #fff, #e5e5e5);/* Safari 5.1, Chrome 10+ */background: -webkit-linear-gradient(top, #fff, #e5e5e5);}
+a:link.advancesearch, a:visited.advancesearch {color:#999; font:bold 12px "Trebuchet MS", arial, sans-serif; margin-left:2em; text-decoration:none;}
+a:hover.advancesearch {text-decoration:underline;}
+	
+/* modules */
+#left .module {margin:2em 0;}
+
+/* search bar */
+#left .searchbar {background-position:right -78px; clear:both; margin-top:0; overflow:auto; position:relative;  width:307px;}
+#left .searchbar input {border:1px solid #ccc; color:#999999; font:14px Georgia,"Times New Roman",Times,serif; margin-left:30px; padding:.75em; width:16em; -moz-border-radius:10px; -webkit-border-radius:10px;}
+#left .searchbar h2 {margin:0 .5em; padding-top:1em;}
+#left .searchbar h2 span {background-position:left -633px; float:left; margin:0; height:34px; width:37px;}
+#left .searchbar p {margin:.5em;}
+#left .searchbar button.submitsearchbtn {border:1px solid #ccc; color:#999; cursor:pointer; float:right; font:14px Georgia,"Times New Roman",Times,serif; margin-right:2em; padding:.5em;  -moz-border-radius:5px; -webkit-border-radius:5px;}
+#left .searchbar button.submitsearchbtn:hover {color:#0d0d0d;}
+#left .advancesearch {float:left; padding-left:2.5em;}
+#left .advancesearch a {color:#999; font-size:11px; }
+#left .advancesearch a:hover {text-decoration:none;}
+
+/* categories */
+#left .categories {background-position:right -78px; clear:both; margin-top:0; position:relative; width:307px;}
+/*#left .categories .controlbox {background-position:-1px -731px; cursor:pointer; height:23px; position:absolute; right:10px; top:10px; width:23px;}*/
+#left .categories h2 {margin:0 .5em; padding-top:1em;}
+#left .categories h2 span {background-position:left -524px; float:left; margin:-.5em .5em 0 0; height:34px; width:37px;}
+#left .categories ul {clear:both; margin:0 1.5em; padding-top:1em;}
+#left .categories ul li {line-height:1.65em;}
+#left .categories ul li a {color:#999; font:normal 12px "Lucida Sans Unicode", "Lucida Sans", arial, tahoma, sans-serif;}
+#left .categories ul li a em {color:#ccc;}
+#left .categories ul li a:hover {text-decoration:none;}
+
+/* locations */
+#left .locations {background-position:right -78px; clear:both; position:relative; width:307px;}
+/*#left .locations .controlbox {background-position:-1px -731px; cursor:pointer; height:23px; position:absolute; right:10px; top:10px; width:23px;}*/
+#left .locations h2 {margin:0 .5em; padding-top:1em;}
+#left .locations h2 span {background-position:left -582px; float:left; margin:0 2px 0 0; height:34px; width:37px;}
+#left .locations ul {clear:both; margin:0 1.5em; padding-top:1em;}
+#left .locations ul li {line-height:1.65em;}
+#left .locations ul li a {color:#999; font:normal 12px "Lucida Sans Unicode", "Lucida Sans", arial, tahoma, sans-serif;}
+#left .locations ul li a em {color:#ccc;}
+#left .locations ul li a:hover {text-decoration:none;}
+
+/* additional */
+#left .additional {background-position:right -78px; clear:both; position:relative; width:307px;}
+/*#left .additional .controlbox {background-position:-1px -779px; cursor:pointer; height:23px; position:absolute; right:10px; top:10px; width:23px;}*/
+#left .additional h2 {margin:0 .5em; padding-top:1em;}
+#left .additional h2 span {background-position:-60px -968px; float:left; margin:0; height:34px; width:37px;}
+#left .additional ul {clear:both; margin:0 1.5em; padding-top:1em;}
+#left .additional ul li {line-height:1.65em;}
+#left .additional ul li a {color:#999; font:normal 12px "Lucida Sans Unicode", "Lucida Sans", arial, tahoma, sans-serif;}
+#left .additional ul li a em {color:#ccc;}
+#left .additional ul li a:hover {text-decoration:none;}
+
+/* favorites */
+#left .favorites {background-position:right -78px; clear:both; position:relative; width:307px;}
+/*#left .favorites .controlbox {background-position:-1px -731px; cursor:pointer; height:23px; position:absolute; right:10px; top:10px; width:23px;}*/
+#left .favorites h2 {margin:0 .5em; padding-top:1em;}
+#left .favorites h2 span {background-position:2px -677px; float:left; margin:0; height:34px; width:37px;}
+#left .favorites ul {clear:both; margin:0 1.5em; padding-top:1em;}
+#left .favorites ul li {line-height:1.65em;}
+#left .favorites ul li a {color:#999; font:normal 12px "Lucida Sans Unicode", "Lucida Sans", arial, tahoma, sans-serif;}
+#left .favorites ul li a:hover {text-decoration:none;}
+#left .favorites ul li a.removefavsb {color:#f25d27;}
+
+#left .controlbox {background-position:-1px -731px; cursor:pointer; height:23px; position:absolute; right:10px; top:10px; width:23px;}
+#left .controlboxcollapsed {background-position:-1px -779px; cursor:pointer; height:23px; position:absolute; right:10px; top:10px; width:23px;}
+
+#left .controlbox:hover {background-position:-51px -731px;}
+#left .controlboxcollapsed:hover {background-position:-51px -779px;}
+#left .ulcontrolboxcollapsed {display:none;}
+
+
+/* menu */
+.menucontainer {
+background-color: #0098db;
+background: -moz-linear-gradient(top, #0098db, #005c85);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(top, #0098db, #005c85);
+border-radius:5px 0 0 5px; float:right; margin:0; float:right; position:relative; width:670px;}
+#menu {margin-left:1em;}
+#menu li a, #menu li {/*background:#025159;*/ float:left; position:relative; z-index:9999;}
+#menu li a:hover {background:#005c85;}
+#menu li {position:relative;}
+#menu li a {color:#fff; font-size:13px; text-decoration:none; padding:1em 1.5em}
+#menu li a:hover {color:#fff;}
+
+/* submenu */
+#menu li ul {display:none; margin:0; padding:0; left:0; position:absolute; top:100%;}
+#menu li:hover ul {display:block;}
+#menu li ul li, #menu li ul li a {background:#005c85; float:none;}
+#menu li ul li { _display: inline;} /* for IE6*/
+#menu li ul li a:hover {background:#004a6b;}
+#menu li ul li a {display:block; width:150px; padding:.60em 1.5em;}
+
+/* searchbar */
+#searchbar {background:#0098db; border-radius:5px 5px 0 0; margin:1em 0 1em; -moz-border-radius:5px 5px 0 0; padding:1em; -webkit-border-radius:5px 5px 0 0;}
+#searchbar p input {border:none; border-radius:10px; color:#999; font:normal 22px Georgia, "Times New Roman", Times, serif; margin-right:.5em; padding:.5em; width:19em;}
+#searchbar p button {
+background-color: #0098db;
+background: -moz-linear-gradient(top, #0098db, #005c85);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(top, #0098db, #005c85);
+border-radius:5px;
+border:1px solid #008ecc;
+color:#fff; cursor:pointer; font:normal 14px "Trebuchet MS", arial, sans-serif; padding:1.125em; text-transform:uppercase; width:8em;
+font-weight:bold;
+}
+#searchbar p button:hover {
+background:#005c85;
+background: -moz-linear-gradient(top, #005c85, #0098db);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(top, #005c85, #0098db);
+}
+#searchbar p {margin:.25em;}
+#searchbar p.advancesearch {text-align:right;}
+#searchbar p a {color:#fff; padding-right:1em; text-decoration:none;}
+#searchbar p a:hover {text-decoration:underline;}
+
+
+/* content */
+#container {float: right; margin-top:8px; width:670px;}
+#container .pane {border:2px solid #ccc; border-radius:5px; min-height:200px; -moz-border-radius:10px; -webkit-border-radius:10px; position:relative;}
+#container .pane .menuselector {background-position:left -475px; height:22px; left:500px; position:absolute; top:-22px; width:26px; z-index:9999;}
+
+
+/* container align center */
+#containercenter .signuplistinggauge {margin:auto; width:50%; margin-top:4em; margin-bottom:2em; position:relative; text-align:center; }
+#containercenter .signuplistinggauge p {color:#0d0d0d; font:22px "Trebuchet MS", arial, tahoma, sans-serif; text-align:center;}
+#containercenter .signuplistinggauge ul {overflow:hidden; padding-left:98px; margin-top:-1em;}
+#containercenter .signuplistinggauge ul li {float:left; position:relative; z-index:9999;}
+#containercenter .signuplistinggauge ul li span {display:block; height:32px; margin:0 10px; width:32px;}
+#containercenter .signuplistinggauge ul .stepone {background-position:-226px -773px;}
+#containercenter .signuplistinggauge ul .stepone.selected {background-position:-275px -773px;}
+#containercenter .signuplistinggauge ul .steptwo {background-position:-226px -822px;}
+#containercenter .signuplistinggauge ul .steptwo.selected {background-position:-275px -822px;}
+#containercenter .signuplistinggauge ul .stepthree {background-position:-226px -868px;}
+#containercenter .signuplistinggauge ul .stepthree.selected {background-position:-275px -868px;}
+#containercenter .signuplistinggauge ul .stepfour {background-position:-226px -915px;}
+#containercenter .signuplistinggauge ul .stepfour.selected {background-position:-275px -915px;}
+#containercenter .signuplistinggauge ul .stepfive {background-position:-226px -958px;}
+#containercenter .signuplistinggauge ul .stepfive.selected {background-position:-275px -958px;}
+#containercenter .signuplistinggauge ul .stepsix{background-position:-226px -728px;}
+#containercenter .signuplistinggauge ul .stepsix.selected {background-position:-275px -728px;}
+#containercenter .signuplistinggauge .linegauge {background-position:-314px -973px; height:4px; left:130px; position:absolute; top:52px; width:270px; z-index:9990;}
+
+#containercenter .signupbcrumbs {margin-bottom:1em; text-align:right;}
+#containercenter .signupbcrumbs ul li {display:inline;}
+#containercenter .signupbcrumbs ul li.firstchild {border-right: 1px dotted #696969;}
+#containercenter .signupbcrumbs ul li a {color:#696969; font-size:12px; padding:0 1em;}
+#containercenter .signupbcrumbs ul li a:hover {text-decoration:none;}
+
+#containercenter form h3 {background:#e5e5e5; font:18px "Trebuchet MS", arial, sans-serif; margin:1em 0; padding:.5em 1em; text-shadow:1px 1px 0 #fff;}
+#containercenter form p {padding-left:2em;}
+#containercenter form p label {float:left; display:block; width:18em; padding:.5em;}
+#containercenter form p input, #containercenter form select {width:25em; padding:.5em;}
+#containercenter form p input.submitbtn {margin-left:30em; width:13em;}
+#containercenter form p input.submitbtn.images {margin-left:20em;}
+
+#containercenter form p.forcbox {padding-left:21em;}
+#containercenter form p.forcbox label {float:none; display:inline;}
+#containercenter form p.forcbox input {width:auto;}
+#containercenter form p a.forgotpassword {color:#f25d27; margin-left:37.5em;}
+#containercenter form p a.forgotpassword:hover {text-decoration:none;}
+
+
+#containercenter form p.forradbtn label {float:none; display:inline;}
+#containercenter form p.forradbtn input {width:auto;}
+
+#containercenter .categorybox > div {/*border:1px solid #ccc;*/ margin:.5em; padding:.5em; position:relative; width:350px;}
+#containercenter .categorybox div span {background:#eaeaea; border-radius:3px; border:1px solid #ccc; cursor:pointer; padding:1px 4px; position:absolute; right:5px; }
+#containercenter .categorybox div span:hover {background:#dfdfdf;}
+
+#containercenter .categoryparentbox {float:left; margin:0 0 0 16em;}
+#containercenter .categoryparentbox a#addcategorybtn {color:#f25d27; font-size:.75em;}
+#containercenter .categoryparentbox p {padding:0;}
+#containercenter .categoryparentbox a#addcategorybtn:hover {text-decoration:none;}
+
+/* innercontent */
+#container .innercontent {padding:1.5em;}
+.searchresultitem {border:2px solid #ccc; border-radius:5px; margin:20px 0; -moz-border-radius:5px; padding:10px; position:relative; -webkit-border-radius:5px;}
+.searchresultitem.odd {background:#f2f2f2;}
+.searchresultitem.even {background:#fff3ee;}
+.searchresultitem .claimtag {background-position:left -236px; height:33px; left:-15px; position:absolute; top:-5px; width:43px; z-index:9900; }
+.searchresultitem .claimtag p {color:#f27041; font:bold 12px arial, tahoma, sans-serif; padding:2px 1em 0 0; text-align:center;}
+.serpsbox hr {color:#025159;}
+.serpsbox .serpslabel .leftcol {float:left; width:75%;}
+.serpsbox .serpslabel .rightcol {float:right;}
+.serpsbox .businesslogo {float:left; width:17%;}
+.serpsbox .businessdtl {color:#f25d27; float:right; width:81%;}
+
+.serpsbox .businessdtl h4 a:link, .serpsbox .businessdtl h4 a:visited {color:#f25d27; text-decoration:none;}
+.serpsbox .businessdtl h4 a:hover {color:#b8390c;}
+.serpsbox .serpfooter {clear:both;}
+.serpsbox .serpfooter div {float:left;}
+.serpsbox .serpfooter .address {width:50%;}
+.serpsbox .serpfooter .address p {font-size:10px;}
+.serpsbox .serpfooter .address p span {background-position:left -301px; float:left; margin-right:5px; height:22px; width:31px; }
+.serpsbox .serpfooter .phone {width:25%;}
+.serpsbox .serpfooter .phone p {font-size:10px;}
+.serpsbox .serpfooter .phone p span {background-position:left -357px; float:left; margin-right:5px; margin-top:-5px; height:27px; width:15px;}
+.serpsbox .serpfooter .favorites {float:right;}
+.serpsbox .serpfooter .favorites p {font-size:10px;}
+.serpsbox .serpfooter .favorites p a {color:#999; text-decoration:none;}
+.serpsbox .serpfooter .favorites p a:hover {text-decoration:underline;}
+.serpsbox .serpfooter .favorites p a:hover span {background-position:left -428px;}
+.serpsbox .serpfooter .favorites p a span {background-position:left -402px; float:left; margin-right:3px; height:14px; width:13px;}
+.serpsbox .serpfooter .favorites p a.favcached span {background-position:left -428px;}
+
+/* listing details page */
+.masterdetails {margin-top:1em; position:relative;}
+.masterdetails .mapbutton {top:-35px; position:absolute; right:15px;}
+.masterdetails .mapbutton {list-style:none;}
+.masterdetails .mapbutton li a {background-position:-38px -971px; color:#426293; display:block; font-size:12px; font-weight:bold; padding-left:20px; text-decoration:none;}
+.masterdetails .mapbutton li a:hover {color:#f36025;}
+.masterdetails .contentWindow, .masterheader .contentWindow {font:12px "Trebuchet MS", arial, tahoma, sans-serif;}
+.masterdetails .contentWindow span, .masterheader .contentWindow span {font-weight:bold;}
+
+.masterheader .businesstitle {color:#f36025; float:left; font:normal 22px georgia, "Times New Roman", Times, helvetica, serif; margin:.25em 0 1em 0; width:80%;}
+.masterheader .listingpackage {color:#f36025; float:right; font:normal 16px georgia, "Times New Roman", Times, helvetica, serif; margin-top:.75em;}
+.masterheader .listingpackage span {background-position:2px -826px; float:left; height:21px; margin:3px .25em 0 0; width:21px;}
+.masterheader .logoandgoogleads, .masterheader .minimap {height:222px;width:350px;}
+.masterheader .logoandgoogleads {border:1px solid #ccc; float:left; margin-bottom:1.5em; width:244px;}
+.masterheader .logoandgoogleads.googleadsonly {border:none;}
+.masterheader .minimap {border:1px solid #ccc; float:right; width:58%;}
+.masterheader .googleadsonly ul li {margin-top:10px;}
+.masterheader .googleadsonly ul li p {color:#000; font-size:11px; line-height:1.25em; margin:2px 0;}
+.masterheader .googleadsonly ul li p a {color:#1062b9; font-size:13px;}
+.masterheader .googleadsonly ul li p a.smaller {font-size:10px;}
+
+.masterdetails {background:#cccccc; border:1px solid #ccc; border-radius: 5px; clear:both;}
+.masterdetails .menutabs {/*border:1px solid red;overflow:auto; */ position:relative;}
+.masterdetails .menutabs ul {margin:.25em 0 0 1em;}
+.masterdetails .menutabs ul li {float:left; padding:.5em 1.5em;}
+.masterdetails .menutabs ul li a {color:#0d0d0d; text-decoration:none;}
+.masterdetails .menutabs ul li a.selected {color:#973101;}
+.masterdetails .menutabs .submenuselector {background-position:left -970px; bottom:-8px; height:11px; left:55px; position:absolute; width:20px; z-index:9000;}
+.masterdetails .menutabs .submenuselector.photos {left:170px; }
+.masterdetails .menutabs .submenuselector.map {left:262px; }
+.masterdetails .menutabs .submenuselector.enquiry {left:370px; }
+
+.masterdetails .googleadsonly ul li {margin-top:10px;}
+.masterdetails .googleadsonly ul li p {color:#000; font-size:11px; line-height:1.25em; margin:2px 0;}
+.masterdetails .googleadsonly ul li p a {color:#1062b9; font-size:13px;}
+.masterdetails .googleadsonly ul li p a.smaller {font-size:10px;}
+
+.masterdetails .wordpane {background:#fff; border:6px solid #ccc; clear:both; overflow:hidden; position:relative;}
+.wordpane .editorpane {float:left; width:55%; padding:20px;}
+.wordpane .editorsideinfo {background:#ebebeb; float:right; margin:10px 10px 0 0; padding:20px; width:28%; -moz-border-radius:4px; -webkit-border-radius: 4px;}
+.wordpane .editorsideinfo h4 {color:#0d0d0d; font:bold 16px "Trebuchet MS", arial, tahoma, sans-serif;}
+.wordpane .editorsideinfo p {color:#0d0d0d; padding-left:1.5em;}
+.wordpane .editorsideinfo ul li a {color:#0d0d0d; display:block; font-size:12px; height:27px; text-decoration:none;}
+.wordpane .editorsideinfo ul li {margin:.5em 0;}
+.wordpane .editorsideinfo ul li a.viewphone {background-position:left -862px; padding-left:30px;}
+.wordpane .editorsideinfo ul li a.sendemail {background-position:left -900px; padding-left:30px;}
+.wordpane .editorsideinfo ul li a.viewsite {background-position:left -926px; padding-left:30px;}
+
+.wordpane .minieditorpane {float:left; width:55%; padding:20px;}
+
+.wordpane .minieditorsideinfo {background:#ebebeb; float:left; margin:-10px 0 20px 20px; padding:20px; width:48%; -moz-border-radius:4px;  -webkit-border-radius: 4px;}
+.wordpane .minieditorsideinfo h4 {color:#0d0d0d; font:bold 16px "Trebuchet MS", arial, tahoma, sans-serif;}
+.wordpane .minieditorsideinfo p {color:#0d0d0d; padding-left:1.5em;}
+.wordpane .minieditorsideinfo ul li a {color:#0d0d0d; display:block; font-size:12px; height:27px; text-decoration:none; width:15em;}
+.wordpane .minieditorsideinfo ul li {margin:.5em 0;}
+.wordpane .minieditorsideinfo ul li a.viewphone {background-position:left -862px; padding-left:30px;}
+.wordpane .minieditorsideinfo ul li a.sendemail {background-position:left -900px; padding-left:30px;}
+.wordpane .minieditorsideinfo ul li a.viewsite {background-position:left -926px; padding-left:30px;}
+
+.wordpane .sponsoredlisting {float:right; padding:20px; width:30%;}
+.wordpane .sponsoredlisting h3 {color:#106293; font:bold 18px/1.5em "Trebuchet MS", arial, tahoma, sans-serif;}
+.wordpane .sponsoredlisting ul {margin-left:15px;}
+
+/* resets for editorpane tree */
+.editorpane p, .minieditorpane p, .minieditorpane {color:#000; font:normal 12px/1.5em "Trebuchet MS", arial, tahoma, sans-serif;}
+.editorpane ul, .minieditorpane ul {font-size:12px; margin:1em 0;}
+.editorpane ul li, .minieditorpane ul li {margin:0 1em;}
+.editorpane a, .editorpane a:link, .editorpane a:hover, .minieditorpane a, .minieditorpane a:link, .minieditorpane a:hover {color:#f36025;}
+.editorpane a:hover, .minieditorpane a:hover {text-decoration:none;}
+
+/* wordpane content */
+.wordpanecontent {background:#fff; width:600px;}
+
+/* hugemap */
+.mapbox #hugemap {height:460px; margin:5px; width:590px;}
+
+/* form validation */
+.errorreq {color:#8e130d; font-weight:bold;}
+.errorinputreq {background:#fff08c;}
+
+/* wordpane form*/
+.wordpane form {padding:1em;}
+.wordpane form h2 {color:#0d0d0d; font:22px "Trebuchet MS", arial, sans-serif; margin:0;}
+.wordpane form p span {color:#8e130d; margin-left:7.5em;}
+.wordpane form p label {display:block; float:left; padding:.5em; width:7em;}
+.wordpane form p input {padding:.5em;width:15em;}
+.wordpane form p textarea {height:10em; width:16em;}
+.wordpane form p input.submitbtn {margin-left:15em; width:8em;}
+
+/* wordpane section */
+.wordpane .hidden {display:none;}
+.mapbox {visibility:hidden;}
+
+ /* photos */
+.photosbox {padding:1em;}
+.photosbox .photosviewbox .imageviewer {float:left; overflow:hidden; width:370px;}
+.photosbox .photosviewbox .imageviewer img {width:100%;}
+.photosbox .thumbnails {float:right; width:180px;}
+.photosbox .thumbnails div {float:left; height:65px; margin:3px;width:70px;}
+.photosbox .thumbnails div img {cursor:pointer; height:100%; width:100%;}
+
+/* footer */
+#footer {background:#005c85; clear: both; min-height:120px; padding:2em 0 0 0;}
+#footer p {color:#fff;}
+#footer .ftrLeft {float:left; width:45%; text-transform:uppercase; overflow:auto;}
+#footer .ftrLeft .copyright p {font:normal 14px "Trebuchet MS", arial, sans-serif;}
+#footer .ftrLeft .sitelinks ul li {border-right:1px dotted #003851; display:inline;}
+#footer .ftrLeft .sitelinks ul li:last-child, #footer .ftrLeft .sitelinks ul li.lastchild {border-right:none;}
+#footer .ftrLeft .sitelinks ul li a:link, #footer .ftrLeft .sitelinks ul li a:visited {color:#003851/*787878*/; font:normal 14px "Trebuchet MS", arial, sans-serif; text-decoration:none; padding:0 .5em;}
+#footer .ftrLeft .sitelinks ul li:first-child a, #footer .ftrLeft .sitelinks ul li.firstchild a {padding-left:0;}
+#footer .ftrLeft .sitelinks ul li a:hover {color:#004a69;}
+#footer .ftrLeft .developer p a:link, #footer .ftrLeft .developer p a:visited {color:#eab500; font: normal 10px"Trebuchet MS", arial, sans-serif; text-transform:capitalize; text-decoration:none;}
+#footer .ftrLeft .developer p a:hover {text-decoration:underline;}
+#footer .ftrRight {float:right;}
+#footer .ftrRight .feedcontainer {margin-top:2em;}
+#footer .ftrRight .feedcontainer a:link, #footer .ftrRight .feedcontainer a:visited {color:#003851; font:14px "Trebuchet MS", arial, sans-serif; text-decoration:none;}
+#footer .ftrRight .feedcontainer a:hover {color:#004a69;}
+#footer .ftrRight .feed {background-position:-80px -148px; display:block; float:left; height:54px; margin-top:-2em; width:55px;}
+
+/* footer simple */
+#footer_b {background:#fff;
+background: -moz-linear-gradient(top, #e5e5e5, #fff);
+/* Safari 5.1, Chrome 10+ */ 
+background: -webkit-linear-gradient(top, #e5e5e5, #fff);
+ border-top:2px solid #e5e5e5; clear: both; min-height:25px;}
+#footer_b .middle ul {margin:1em auto; width:140px;}
+#footer_b .middle ul li {display:inline;}
+#footer_b .middle ul li.firstchild {border-right: 1px solid #ccc;}
+
+#footer_b .middle ul li a {color:#696969; font-size:11px; padding:0 1em;}
+#footer_b .middle ul li a:hover {text-decoration:none;}
+
+.calltoaction {float:right; margin:3.5em 0 1em 2em;}
+/* some controls and images */
+a.ctabox {background-position: -24px -79px; color:#fff; display:block; float:left; font:22px georgia, "Times New Roman", Helvetica, serif; padding:15px 30px 15px 20px; text-decoration:none;}
+a.ctabox span {background-position:-47px -150px; display:block; float:left; height:12px; margin: 8px 5px 0 0; width:13px;}
+a:hover {color:#973101;}

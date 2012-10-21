@@ -1,0 +1,44 @@
+/* CSS Document */
+/*
+ | ------------------------------------------------------------------------------------------
+ | This is the main stylesheet for this site: http://casinojobs.com
+ | ------------------------------------------------------------------------------------------
+ |
+ | @Author		:		Kenneth "digiArtist" Vallejos
+ | @Created		:		Friday, May 4, 2012
+ | @Modified	:		-----
+ |
+ |
+ */
+
+/* resets all default */
+body, div, p, h1, h2, h3, h4, h5, h6, ul, li {margin:0; padding:0; font-family:"Trebuchet MS", "Lucida Sans Unicode", arial, sans-serif;}
+
+.sprite {background:url(../../images/common_sprite.png);}
+.error {color:#ac1414; margin-left:.5em; font-size:.9em;}
+#MainContainer {margin:7em auto 0; width:400px;}
+
+
+/* login dialog box */
+#MainContainer .logindlg h1 {background-position:-102px -650px; padding:.6em 0 .5em 2.5em;}
+#MainContainer .logindlg h1 {color:#3e3e3e; font:26px "Times New Roman", Times, Helvetica, serif;}
+.logindlg {
+	background-color: #f2f2f2; background: -moz-linear-gradient(top, #f2f2f2, #ebebeb);/* Safari 5.1, Chrome 10+ */ background: -webkit-linear-gradient(top, #f2f2f2, #ebebeb); border:1px solid #ccc; border-radius:15px; -moz-box-shadow: 1px 1px 12px #a2a2a2;
+-webkit-box-shadow: 1px 1px 12px #a2a2a2;
+box-shadow: 1px 1px 12px #a2a2a2; min-height:250px;  -moz-border-radius:15px; -webkit-border-radius:15px; padding:2em; overflow:auto;}
+
+.logindlg p {color:#3e3e3efont:18px "Times New Roman", Times, Helvetica, serif;; padding:.75em 0;}
+.logindlg p label {font:16px "Times New Roman", Times, Helvetica, serif; width:15em;}
+.logindlg p input {border:1px solid #ccc; border-radius:10px; font:16px "Times New Roman", Times, Helvetica, serif; padding:.75em; -moz-border-radius:10px; width:20em;}
+.logindlg .colleft {float:left;}
+.logindlg .colleft ul {list-style:none;}
+.logindlg .colleft ul li {color:#3e3e3e; cursor:pointer; font:12px "Times New Roman", Times, Helvetica, serif; padding:.25em 0;}
+.logindlg .colleft ul li label:hover {color:#3e3e3e; cursor:pointer;}
+.logindlg .colleft ul li a {color:#3e3e3e; padding-left:25px; text-decoration:none;}
+.logindlg .colleft ul li a:hover {text-decoration:underline;}
+
+#MainContainer .logindlg h1.adminlogin {background-position:-108px -1031px;}
+
+.logindlg .colright {float:right;}
+.logindlg .colright input {border-radius:15px; color:#ccc; cursor:pointer; font:22px "Times New Roman", Times, Helvetica, serif; border:1px solid #ccc; -moz-border-radius:15px; -webkit-border-radius:15px; padding:.25em .75em;}
+.logindlg .colright input:hover {color:#3e3e3e;}
