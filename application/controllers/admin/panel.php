@@ -15,8 +15,7 @@ class Panel extends CI_Controller {
 		
 		// authorizes access
 		authUser(array('section' => 'login/admin', 'sessvar' => array('admin_uname', 'admin_islog', 'admin_fullname')));
-		
-		
+				
 		// sets default prefs
 		$this->_mConfig = array('full_tag_open' => '<div class="pagination">', 'full_tag_close' => '</div>', 'first_link' => 'First', 'last_link' => 'Last', 'next_link' => '»', 'prev_link' => '«');
 

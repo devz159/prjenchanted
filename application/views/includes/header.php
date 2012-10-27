@@ -151,4 +151,6 @@
 				<?php $this->load->view('includes/settings/elrtesettings'); ?>			
 			});
 		</script>
+	<?php elseif(strtolower($section) == 'paypal'): ?>
+    	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/directory/main.css" />
     <?php endif; ?>

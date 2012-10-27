@@ -80,6 +80,10 @@
     <p><label>Site Offline Message</label><br /><textarea class="generalsettings" name="offlinemsg"><?php echo $mSettings['offlinemsg']; ?></textarea></p>
  <fieldset><legend>Affiliate Program</legend><label for="showaffiliateprogram">Show on business profile page<input id="showaffiliateprogram" <?php echo ($mSettings['showaffiliateprogram'] == '1') ? 'checked="checked"' : '' ?> type="checkbox" name="showaffiliateprogram" value="1" /></label>
 </fieldset>
+
+<fieldset><legend>Paypal</legend>
+	<label for="turnonpaypalsandbox">Turn on Paypal sandbox environment<input id="turnonpaypalsandbox" <?php echo ($mSettings['paypalsandbox'] == '1') ? 'checked="checked"' : '' ?> type="checkbox" name="showaffiliateprogram" value="1" />
+</fieldset>
 <p><input class="submitbtn" type="submit" value="Save Settings" /></p>
 <div class="clearthis"></div>
 

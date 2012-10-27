@@ -53,6 +53,9 @@
 			if(isSection('admin', 1))
 				$data['section'] = 'admin';
 				
+			if(isSection('paypal', 1))
+				$data['section'] = 'paypal';
+				
 					
 			$CI->load->view('includes/header', $data);
 		}

@@ -2,12 +2,23 @@
  
 class Paypal extends CI_Controller  {
 
+	private $_mFullName;
+	private $_mUserName;
+	private $_mMyLoginError;
+	
 	function __construct() {
 		parent::__construct();
+		
+		// initializes some member variables
+		$this->_mFullName;
+		$this->_mUserName = '';
+		$this->_mMyLoginError = null;
 		
 	}
 	
 	public function process() {
+		
+		//@mnctodo: open db to get paypal business accnt.
 		$pay_receiver = 'kennva_1341307061_biz@gmail.com';
 		
 		// read the post from PayPal system and add 'cmd'
@@ -20,6 +31,7 @@ class Paypal extends CI_Controller  {
 		
 		
 		$ch = curl_init();
+		// @mnctodo: open db to get settings for PayPal 
 		curl_setopt($ch, CURLOPT_URL, 'https://www.sandbox.paypal.com/cgi-bin/webscr');
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -61,11 +73,19 @@ class Paypal extends CI_Controller  {
 	}
 	
 	public function thankyou() {
-		// clears the content of the cart library
+		// clears the content of the cart library. this is very necessary
 		$this->load->library('cart');
 		$this->cart->end();
 		
-		echo 'Welcome for your payment.';
+		$params = array('advr_uname', 'advr_islog', 'advr_fullname');
+		$this->sessionbrowser->getInfo($params);
+		$arr = $this->sessionbrowser->mData;
+		
+		// authorizes access. to secure if the current session is valid
+		authUser(array('section' => 'login', 'sessvar' => array('advr_uname', 'advr_islog', 'advr_fullname')));
+		
+		$data['main_content'] = 'paypal/thankyoupage_view';
+		$this->load->view('includes/directory/template_b', $data);
 
 	}
 	
@@ -213,4 +233,14 @@ class Paypal extends CI_Controller  {
 		return $amount;
 	}
 	
+	private function _getUser() {
+		$params = array('advr_uname', 'advr_islog', 'advr_fullname');
+		$this->sessionbrowser->getInfo($params);
+			
+		$arr = $this->sessionbrowser->mData;
+			
+		$this->_mUserName = $arr['advr_uname'];
+		$this->_mFullName = $arr['advr_fullname'];
+		
+	}
 }
