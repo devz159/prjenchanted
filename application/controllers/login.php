@@ -180,8 +180,11 @@ class Login extends CI_Controller {
 			$ulink .= base_url('login/processforgotpassword') . '/';
 			$ulink .= $this->input->post('sessid') . '/';
 			$ulink .= strencode('advertiser') . '/';
-			$ulink .= strencode($this->input->post('email', TRUE)) . '/';						
+			$ulink .= strencode($this->input->post('email'), TRUE) . '/';						
 			
+			$this->load->helper('util');
+			//call_debug(getUser($email), FALSE);
+		
 			$outputmsg = '';
 			$outputmsg .= 'Hello User,<br />';
 			$outputmsg .= 'To complete your passowrd retrieval process please click the link. ' . '<a target="_blank" href="' . $ulink . '">' . $ulink . '</a>';
@@ -220,7 +223,16 @@ class Login extends CI_Controller {
 		$userType = ($this->uri->segment(4)) ? strdecode($this->uri->segment(4)) : '';
 		$email = ($this->uri->segment(5)) ? strdecode($this->uri->segment(5)) : '';
 		
-		on_watch("$sessId, $userType, $email");
+		// get_user credentials
+		$this->load->helper('util');
+		call_debug(getUser($email), FALSE);
+		
+		if($sessId == "" || $userType == "" || $email == "") {
+			echo "There's nothing to process here.";
+		} else {
+			on_watch("$sessId, $userType, $email");
+		}
+		
 	}
 	
 	private function _sendEmail($param) {
