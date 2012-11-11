@@ -20,7 +20,7 @@ class Listing extends CI_Controller {
 	}
 	 
 	 public function index() {
-	 		 	
+	 	
 	 	// gets the currently logged in user
 	 	$this->_getUser();	 	
 	 	$data['user'] = $this->_mFullName;	 	

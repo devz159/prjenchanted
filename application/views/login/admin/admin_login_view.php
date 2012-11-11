@@ -6,7 +6,7 @@
     <div class="colleft">
     	<ul>
         	<li><input id="rememberme" type="checkbox" name="rememberme" /> <label for="rememberme">Remember me</label></li>
-            <li><a href="#">Forget password?</a></li>
+            <li><a href="<?php echo base_url('login/forgetpassword/' . strencode('admin')); ?>">Forget password?</a></li>
         </ul>
     </div>
     

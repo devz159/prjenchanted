@@ -12,10 +12,7 @@ class My extends CI_Controller {
 		$this->_mUserName = null;
 		$this->_mFullName = null;
 		$this->_mRowCount;
-		
-		$session = $this->session->all_userdata();
-		
-		call_debug($session);
+	
 	}
 	
 	public function index() {

@@ -72,6 +72,13 @@ class Home extends CI_Controller {
 		
 	}
 	
+	public function secret() {
+		$str = "-  -";
+		
+		echo 'Your hash: ' . strencode($str) . '<br />';
+		echo 'Your rhash: ' . strdecode(strencode($str));
+	}
+	
 	/* private function _getFavItemsResultSet() {
 		
 		$output = '';

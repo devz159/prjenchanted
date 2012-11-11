@@ -147,6 +147,120 @@ class Login extends CI_Controller {
 		
 	}
 	
+	public function forgetpassword() {
+		
+		// gets what type of user is requesting for password retrieval process
+		$user = ($this->uri->segment(3)) ? $this->uri->segment(3): $this->input->post('user');
+		
+		switch(strdecode($user)) {
+			case 'advertiser':
+				$this->_forgotPasswordAdvertiser($user);
+				break;
+			default:
+				$this->_forgotPasswordAdmin($user);
+		}
+		
+	}
+	
+	public function validateemailadvr() {
+		
+		$user = ($this->input->post('user')) ? $this->input->post('user') : strencode('advertiser');
+		$this->load->library('form_validation');
+		$validation  = $this->form_validation;
+		
+		// sets rules
+		$validation->set_rules('email', 'Email', 'required|valid_email');
+		
+		if($validation->run() === FALSE) {
+			$this->_forgotPasswordAdvertiser($user);
+		} else {					
+			$ulink = '';					
+			
+			// composes email link for confirmation
+			$ulink .= base_url('login/processforgotpassword') . '/';
+			$ulink .= $this->input->post('sessid') . '/';
+			$ulink .= strencode('advertiser') . '/';
+			$ulink .= strencode($this->input->post('email', TRUE)) . '/';						
+			
+			$outputmsg = '';
+			$outputmsg .= 'Hello User,<br />';
+			$outputmsg .= 'To complete your passowrd retrieval process please click the link. ' . '<a target="_blank" href="' . $ulink . '">' . $ulink . '</a>';
+			
+			$param = array('msg' => $outputmsg);
+			
+			//on_watch($ulink);
+			if($this->_sendEmail($param)) {
+				echo 'please check your email to complete the password retrieval process.';
+			} else {
+				echo 'sending failed.';
+			}
+		}
+				
+	}
+	
+	public function validateemailadmin() {
+		
+		$user = ($this->input->post('user')) ? $this->input->post('user') : strencode('admin');
+		$this->load->library('form_validation');
+		$validation  = $this->form_validation;
+		
+		// sets rules
+		$validation->set_rules('email', 'Email', 'required|valid_email');
+		
+		if($validation->run() === FALSE) {
+			$this->_forgotPasswordAdmin($user);
+		} else {
+			echo 'success';
+		}
+		
+	}
+	
+	public function processforgotpassword() {
+		$sessId = ($this->uri->segment(3)) ? $this->uri->segment(3) : '';
+		$userType = ($this->uri->segment(4)) ? strdecode($this->uri->segment(4)) : '';
+		$email = ($this->uri->segment(5)) ? strdecode($this->uri->segment(5)) : '';
+		
+		on_watch("$sessId, $userType, $email");
+	}
+	
+	private function _sendEmail($param) {
+		$subject = 'Password Retrieval';
+		$msg = (array_key_exists('msg', $param)) ? $param['msg'] : 'My message';
+		$receiver = $this->input->post('email');
+		$sender = '';
+		
+  		$config = array(
+			'sender' => $sender,
+  			'receiver' => $receiver,
+  			'from_name' => 'Web Master', // OPTIONAL  			
+  			'subject' => $subject, // OPTIONAL
+  			'msg' => $msg, // OPTIONAL
+  			'email_temp_account' => TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
+  		);
+  		
+  		$this->load->library('emailutil', $config);
+  		if(! $this->emailutil->send())
+  			return FALSE;
+  			
+  		return TRUE;
+  		
+	}
+	
+	private function _forgotPasswordAdvertiser($user) {
+		
+		$data['user'] = $user;
+		$data['main_content'] = 'login/passwordretrieval/advertiser/passwordretrievaladvr_view';
+		$this->load->view('includes/login/template', $data);
+		
+	}
+	
+	private function _forgotPasswordAdmin($user) {
+		
+		$data['user'] = $user;
+		$data['main_content'] = 'login/passwordretrieval/admin/passwordretrievaadminl_view';
+		$this->load->view('includes/login/template', $data);
+		
+	}
 	
 	/**
 	 * utility methods

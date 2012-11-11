@@ -17,7 +17,7 @@
  * 						'cc' => 'supervisor@otherdomainname.com', // OPTIONAL
  * 						'subject' => 'My Subject', // OPTIONAL
  * 						'msg' => 'My message', // OPTIONAL
- * 						'email_temp_account' => TRUE // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).
+ * 						'email_temp_account' => TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).
  * 						'usersettings' => array( // 'usersettings' is OPTIONAL
  * 												'protocol' => 'sendmail',  // OPTIONAL
  *												'mailpath' => '/usr/sbin/sendmail', // OPTIONAL
@@ -99,6 +99,15 @@ class Emailutil {
 		
 	}
 	
+	/**
+	 * 
+	 * Sends the email message using codeigniter's email class.
+	 * @author Kenneth "digiArtist_ph" P. Vallejos
+	 * @since ‎April ‎20, ‎2012, ‏‎12:20:04 AM
+	 * @param none
+	 * @return boolean
+	 * @version 1.0
+	 */
 	public function send() {
 		
 		if($this->CI->email->send() === FALSE) {
