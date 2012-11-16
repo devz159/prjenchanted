@@ -61,8 +61,9 @@
  *                                                                          'title' => '', 
  *                                                                          'fullcontent' => '', 
  *                                                                          'attribs' => array('link=option?about_us', 'menu=main',
+ *                                                                          'count=101'); >>> optional <<<
  *                                                                          );
- *																													 'count=101'); >>> optional <<<
+ *																													 
  *          UPDATE QUERY:
  *              $params['table']        >>> REQUIRED
  *              $params['table']['criteria]  and $params['table']['criteria_value]       >>> REQUIRED

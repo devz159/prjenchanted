@@ -1,33 +1,61 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-function getUser($email) {
-	
-	$CI =& get_instance();
-	$strQry = sprintf("SELECT * FROM vw_alluser WHERE email LIKE '%c%s%c'", 37, $email, 37);	
-	$user = $CI->db->query($strQry)->result();
+if(! function_exists('getUser')) {
+	/**
+	 * 
+	 * Gets user credentials out from database
+	 * @param string $email
+	 * @return asscociative array
+	 * @author Kenneth "digiArtist_ph" P. Vallejos
+	 * @since Monday, November 12, 2012
+	 * @version 1.0
+	 */
+	function getUser($email) {
 
-	// casts into array data type
-	$user = (count($user > 0)) ? (array)$user[0] : '';
-	
-	if($user != '') {
-		if(_isAdvertiser($user['email']))
+		$CI =& get_instance();
+		$strQry = sprintf("SELECT * FROM vw_alluser WHERE email LIKE '%c%s%c'", 37, $email, 37);
+		$user = $CI->db->query($strQry)->result();
+
+		// casts into array data type
+		$user = (count($user > 0)) ? (array)$user[0] : '';
+
+		if($user != '') {
+			if(_isAdvertiser($user['email']))
 			$user['advertiser'] = TRUE;
+		}
+
+		//call_debug($user);
+
+		return $user;
 	}
-	
-	//call_debug($user);
-	
-	return $user;
+
 }
 
-function _isAdvertiser($email) {
-	
-	$CI =& get_instance();	
-	$strQry = sprintf("SELECT * FROM advertiser WHERE email LIKE '%c%s%c'", 37, $email, 37);
-	$rowcount = $CI->db->query($strQry)->num_rows();
-	
-	if($rowcount < 1)
-		return FALSE;
+if(! function_exists('isValidSession')) {
+	function isValidSession($sessid) {
+
+		$CI =& get_instance();
+		$strQry = sprintf("SELECT * FROM newcastle_sessions WHERE session_id='%s'", $sessid);
 		
-	return TRUE;
-	
+		if($CI->db->query($strQry)->num_rows() < 1)
+			return FALSE;
+			
+		return TRUE;
+		
+	}
+}
+
+if(! function_exists('_isAdvertiser')) {
+	function _isAdvertiser($email) {
+
+		$CI =& get_instance();
+		$strQry = sprintf("SELECT * FROM advertiser WHERE email LIKE '%c%s%c'", 37, $email, 37);
+		$rowcount = $CI->db->query($strQry)->num_rows();
+
+		if($rowcount < 1)
+		return FALSE;
+
+		return TRUE;
+
+	}
 }
