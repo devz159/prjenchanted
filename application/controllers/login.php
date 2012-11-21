@@ -178,7 +178,7 @@ class Login extends CI_Controller {
 			// checks if the supplied email exist in the database.
 			$this->load->helper('util');
 			$userInfo = getUser($this->input->post('email'));
-			if(array_key_exists('advertiser', $userInfo)) {
+			if(is_array($userInfo) && array_key_exists('advertiser', $userInfo)) {
 				$ulink = '';
 					
 				// composes email link for confirmation
@@ -198,18 +198,16 @@ class Login extends CI_Controller {
 					
 				$param = array('msg' => $outputmsg);
 					
-				//on_watch($ulink);
 				if($this->_sendEmail($param)) {
-					echo 'please check your email to complete the password retrieval process.';
+					$this->_checkmailpasswordretrieval();
 				} else {
-					echo 'sending failed.';
+					$this->_sendingmailpasswordretvalfailed();
 				}
 			} else {
-				echo "This email: " . $this->input->post('email') . " has not been found in our database.";
+				$this->_emailnotfound();
 			}
 		}
 			
-
 	}
 
 	public function validateemailadmin() {
@@ -245,7 +243,7 @@ class Login extends CI_Controller {
 		} else {
 			// checks session if it's not yet expired
 			if(!isValidSession($sessId)) {
-				echo 'Your session is expired!';
+				echo 'Your session has been expired! Please ask for another password retrieval ticket.' . anchor(base_url('login/forgetpassword/' . strencode('advertiser')), ' Click here.') ;
 			} else {
 				// direct to final process form
 				$this->_processpwordretrievalfinal();
@@ -282,6 +280,28 @@ class Login extends CI_Controller {
 				echo 'Password change failed';
 		}
 		
+		
+	}
+	
+	private function _sendingmailpasswordretvalfailed() {
+		
+		$data['main_content'] = 'login/passwordretrieval/advertiser/emailsendfailed_view';
+		$this->load->view('includes/login/template', $data);
+		
+	}
+	
+	private function _emailnotfound() {
+		
+		$data['email'] = $this->input->post('email');
+		$data['main_content'] = 'login/passwordretrieval/advertiser/emailnotfound_view';
+		$this->load->view('includes/login/template', $data);
+		
+	}
+	
+	private function _checkmailpasswordretrieval() {
+		
+		$data['main_content'] = 'login/passwordretrieval/advertiser/checkemailpasswordretrieval_view';
+		$this->load->view('includes/login/template', $data);
 		
 	}
 	

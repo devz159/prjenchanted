@@ -16,8 +16,10 @@ if(! function_exists('getUser')) {
 		$strQry = sprintf("SELECT * FROM vw_alluser WHERE email LIKE '%c%s%c'", 37, $email, 37);
 		$user = $CI->db->query($strQry)->result();
 
+		//call_debug($user);
+		
 		// casts into array data type
-		$user = (count($user > 0)) ? (array)$user[0] : '';
+		$user = (! empty($user)) ? (array)$user[0] : $user = '';
 
 		if($user != '') {
 			if(_isAdvertiser($user['email']))

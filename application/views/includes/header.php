@@ -16,7 +16,9 @@
 <!--<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.js"></script>-->
 <script type="text/javascript" src="<?php echo base_url(); ?>js/utility.js"></script>
 
-	<?php if(strtolower($section) == 'listing'):  ?>
+	<?php 
+		/* ### LISTING ### */
+		if(strtolower($section) == 'listing'):  ?>
     <!-- don't load the elRTE plugin -->
        <!-- <script src="<?php echo base_url();?>plugins/elrte/js/jquery-ui-1.8.13.custom.min.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="<?php echo base_url();?>plugin/elrte/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css" media="screen" charset="utf-8">-->
@@ -77,10 +79,14 @@
             });
         </script>
         
-    <?php elseif(strtolower($section) == 'my'): ?>	
+    <?php 
+		/* ### MY/ADVERTISER ### */		
+		elseif(strtolower($section) == 'my'): ?>	
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/advertiser/main.css" />
     
-    <?php elseif (strtolower($section) == 'edit_list' || strtolower($section) == 'validate_edit'): ?>
+    <?php 
+		/* ### EDITLIST & VALIDATE_EDIT ### */
+		elseif (strtolower($section) == 'edit_list' || strtolower($section) == 'validate_edit'): ?>
     	<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>plugins/neeuploader/css/jquery.neeuploader.css" />
     	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/advertiser/main.css" />
         
@@ -119,13 +125,18 @@
                 });
 			});
 		</script>
-    
-    <?php elseif(strtolower($section) == 'login'): ?>
+
+    <?php 
+		/* ### LOGIN ### */
+		elseif(strtolower($section) == 'login'): ?>
         <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>css/login/main.css" />
         <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/utility.js"></script>
-    
-    <?php elseif(strtolower($section) == 'admin'): ?>
+    	<script type="text/javascript" src="<?php echo base_url(); ?>js/utility.js"></script>
+        
+   
+    <?php 
+		/* ### ADMIN ### */
+		elseif(strtolower($section) == 'admin'): ?>
 		<!--- admin layout -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/admin/main.css" />
         
@@ -151,6 +162,9 @@
 				<?php $this->load->view('includes/settings/elrtesettings'); ?>			
 			});
 		</script>
-	<?php elseif(strtolower($section) == 'paypal'): ?>
+        
+	<?php 
+		/* ### PAYPAL ### */
+		elseif(strtolower($section) == 'paypal'): ?>
     	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/directory/main.css" />
     <?php endif; ?>
