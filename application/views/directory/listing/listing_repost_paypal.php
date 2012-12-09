@@ -12,7 +12,7 @@
         <div class="sprite linegauge"></div>
     </div><div class="clearthis"></div>
     <p>&nbsp;</p>
-  <?php echo form_open('https://www.sandbox.paypal.com/cgi-bin/webscr', array('method' => 'post', 'class' => 'repostpaypal')); ?>
+  <?php echo form_open(/*'https://www.sandbox.paypal.com/cgi-bin/webscr'*/ paypalsettings::env(), array('method' => 'post', 'class' => 'repostpaypal')); ?>
   <?php foreach($listing as $list): ?>
     	<h3>Reposting</h3>
     	<h4>Title: <?php echo $list->title; ?></h4>

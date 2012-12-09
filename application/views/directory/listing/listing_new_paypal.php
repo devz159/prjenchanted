@@ -4,7 +4,7 @@
         <div class="sprite linegauge"></div>
     </div><div class="clearthis"></div>
     <p>&nbsp;</p>
-  <?php echo form_open('https://www.sandbox.paypal.com/cgi-bin/webscr', array('method' => 'post', 'class' => 'newpaypal')); ?>
+  <?php echo form_open(/*'https://www.sandbox.paypal.com/cgi-bin/webscr'*/ paypalsettings::env(), array('method' => 'post', 'class' => 'newpaypal')); ?>
  
     	<h3>New Listing Entry</h3>
     	<h4>Title: <?php echo $title; ?></h4>

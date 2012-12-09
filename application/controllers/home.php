@@ -73,7 +73,7 @@ class Home extends CI_Controller {
 	}
 	
 	public function secret() {
-		$str = "-  -";
+		$str = "- -";
 		
 		echo 'Your hash: ' . strencode($str) . '<br />';
 		echo 'Your rhash: ' . strdecode(strencode($str));

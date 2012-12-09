@@ -13,7 +13,6 @@ class Listing extends CI_Controller {
 		$this->_mFullName;
 		$this->_mUserName = '';
 		$this->_mMyLoginError = null;
-				
 		$this->load->library('favlist');		
 		$this->load->library('settings');
 		

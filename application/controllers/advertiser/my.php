@@ -221,16 +221,7 @@ class My extends CI_Controller {
 		$data['main_content'] = 'advertiser/payment/payment_view';
 		$this->load->view('includes/advertiser/template', $data);
 	}
-	
-	/*
-	public function index() {
-		// sentinel
-		authUser();
 		
-		$this->profile();
-		
-	}
-	*/
 	public function profile() {
 		// sentinel 
 		authUser();

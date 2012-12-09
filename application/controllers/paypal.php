@@ -29,21 +29,20 @@ class Paypal extends CI_Controller  {
 			$req .= "&$key=$value";
 		}
 		
-		
 		$ch = curl_init();
 		// @mnctodo: open db to get settings for PayPal 
-		curl_setopt($ch, CURLOPT_URL, 'https://www.sandbox.paypal.com/cgi-bin/webscr');
+		curl_setopt($ch, CURLOPT_URL, /*'https://www.sandbox.paypal.com/cgi-bin/webscr'*/ Paypalsettings::env());
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Host: www.sandbox.paypal.com'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(/*'Host: www.sandbox.paypal.com'*/ Paypalsettings::envHost()));
 		$res = curl_exec($ch);
 		curl_close($ch);
 		
-		
+		//call_debug(Paypalsettings::envHost());
 		// assign posted variables to local variables
 		$item_name = $_POST['item_name1'];
 		$item_number = $_POST['item_number1'];
@@ -155,7 +154,7 @@ class Paypal extends CI_Controller  {
 		return TRUE;
 	}
 	
-	private function _add_advertiser_listing($advr,	$lst_id, $created,$payer_email) {
+	private function _add_advertiser_listing($advr,	$lst_id, $created,$payer_email) {  // this should be in a call_user_func
 		
 		$this->load->model('mdldata');		
 		$strQry = sprintf("INSERT INTO advertiser_listing SET ad_id=%d, lst_id=%d, posted='%s', paypal='%s'",
@@ -202,7 +201,7 @@ class Paypal extends CI_Controller  {
 	
 	}
 	
-	private function _update_listing($lst_id) {	
+	private function _update_listing($lst_id) {	 // this should be in a call_user_func
 		$this->mdldata->reset(); // resets mdldata parameters
 		$strQry = sprintf("UPDATE listing SET package='1', status='1', expired='0' WHERE lst_id=%d", $lst_id);
 		$params['querystring'] = $strQry;
@@ -212,6 +211,7 @@ class Paypal extends CI_Controller  {
 		
 		return TRUE;
 	}
+	
 	private function _getTotalAmount($itemcode) {		
 		$amount = 0.00;
 		$item = '';
@@ -243,4 +243,5 @@ class Paypal extends CI_Controller  {
 		$this->_mFullName = $arr['advr_fullname'];
 		
 	}
+	
 }
