@@ -43,9 +43,13 @@ class Search extends CI_Controller {
 			
 		}			
 
-		$this->db->query('CALL sp_categories_count()');
-		$db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;');
+		// $this->db->query('CALL sp_categories_count()');
+		$this->db->query('CALL sp_filtered_categories_count()');
+		// $db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;');
+		$db = $this->db->query("SELECT COUNT(mcat_id) AS `count`, mcat_id, maincategory FROM tmp_filtered_categ_count GROUP BY mcat_id");
 		$records = $db->result();
+		
+		// call_debug($records);
 		
 		$data['sbsettings'] = $this->settings->readSideBar();
 // 		on_watch($data['sbsettings']);
@@ -114,8 +118,10 @@ class Search extends CI_Controller {
 			
 		// 		}
 	
-		$this->db->query('CALL sp_categories_count()');
-		$db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;');
+		// $this->db->query('CALL sp_categories_count()');
+		$this->db->query('CALL sp_filtered_categories_count()');
+		// $db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;');
+		$db = $this->db->query("SELECT COUNT(mcat_id) AS `count`, mcat_id, maincategory FROM tmp_filtered_categ_count GROUP BY mcat_id");
 		$records = $db->result();
 		
 		$data['sbsettings'] = $this->settings->readSideBar();
