@@ -105,7 +105,7 @@ class Search extends CI_Controller {
 		// preps some data
 		$nameCateg = preg_replace('/_/', ' ', $nameCateg);
 		
-		$strQry = sprintf("SELECT l.advr, l.lst_id as id, l.title AS `title`, l.description AS `description`, l.address AS `address`, l.phone AS `phone`, l.postcode AS `postcode`, l.images AS images, s.name AS `state`, c.name as `country`, l.subcategory, t.subcategories, sc.mcat_id FROM ((((listing l LEFT JOIN country c ON l.country=c.c_id)  INNER JOIN state s ON l.state=s.s_id ) LEFT JOIN tmpcateg_count t ON l.lst_id=t.listid) LEFT JOIN subcategories sc ON t.subcategories=sc.scat_id) WHERE sc.mcat_id=%d AND l.status='1' AND l.expired='0'", $idCateg);
+		$strQry = sprintf("SELECT l.advr, l.lst_id as id, l.title AS `title`, l.description AS `description`, l.address AS `address`, l.phone AS `phone`, l.postcode AS `postcode`, l.images AS images, s.name AS `state`, c.name as `country`, l.subcategory, t.subcategories, sc.mcat_id FROM ((((listing l LEFT JOIN country c ON l.country=c.c_id)  INNER JOIN state s ON l.state=s.s_id ) LEFT JOIN tmpcateg_count t ON l.lst_id=t.listid) LEFT JOIN subcategories sc ON t.subcategories=sc.scat_id) WHERE sc.mcat_id=%d AND l.status='1' AND l.expired='0' GROUP BY t.listid", $idCateg);
 		$params['querystring'] = $strQry;
 	
 		$this->load->model('mdldata');
