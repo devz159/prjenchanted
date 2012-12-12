@@ -55,7 +55,7 @@ class Search extends CI_Controller {
 // 		on_watch($data['sbsettings']);
 		$data['favorites'] = getFavItemsResultSet();		
 		$data['maincategories'] = $records;
-		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id GROUP BY s.name")->result();
+		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id WHERE l.status='1' AND l.expired='0' GROUP BY s.name")->result();
 		$data['main_content'] = 'directory/search/search_view';
 		$this->load->view('includes/directory/template', $data);
 	}
@@ -77,6 +77,7 @@ class Search extends CI_Controller {
 		$data['serps'] = $this->mdldata->_mRecords;
 		
 		$data['serpscount'] = $this->mdldata->_mRowCount;
+		call_debug($data['serpscount']);
 		$data['searchkeyword'] = $nameLoc;
 			
 
@@ -87,7 +88,7 @@ class Search extends CI_Controller {
 		$data['sbsettings'] = $this->settings->readSideBar();
 		$data['favorites'] = getFavItemsResultSet();
 		$data['maincategories'] = $records;
-		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id GROUP BY s.name")->result();
+		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id WHERE l.status='1' AND l.expired='0' GROUP BY s.name")->result();
 		$data['main_content'] = 'directory/search/search_view';
 		$this->load->view('includes/directory/template', $data);
 	}
