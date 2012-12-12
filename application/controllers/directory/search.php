@@ -11,7 +11,8 @@ class Search extends CI_Controller {
 		
 		$this->_mFullName;
 		$this->_mUserName = '';
-		
+		//echo $this->googleadsense->test();
+		//die();
 // 		call_debug($this->settings->showall());
 	}
 	
@@ -77,7 +78,7 @@ class Search extends CI_Controller {
 		$data['serps'] = $this->mdldata->_mRecords;
 		
 		$data['serpscount'] = $this->mdldata->_mRowCount;
-		call_debug($data['serpscount']);
+		//call_debug($data['serpscount']);
 		$data['searchkeyword'] = $nameLoc;
 			
 

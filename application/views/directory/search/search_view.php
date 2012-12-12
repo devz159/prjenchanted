@@ -8,8 +8,11 @@
 <div class="serpsbox">
                 	
                     <?php if(isset($serpscount)): ?>
-                    <div>
-                	<img src="<?php echo base_url(); ?>images/googleads.png" />
+                    <div style="text-align:center;">
+					
+                  		<?php echo $this->googleadsense->createAdSense(1); ?>
+
+                	<!--<img src="<?php echo base_url(); ?>images/googleads.png" />-->
                 </div>
                     
                         <hr />

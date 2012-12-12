@@ -16,7 +16,7 @@
             <?php endif; ?></div>
         <?php else: // Standard package ?>
         	<div class="logoandgoogleads googleadsonly" style="position:relative;">
-            	<ul>
+            	<!--<ul>
                 	<li>
                     	<p><a href="#"><strong>Vacancies Melbourne</strong></a></strong></p>
                    	 	<p>5 urgent positions left. Apply now! Vacancies Melbourne</p>
@@ -36,8 +36,10 @@
 						<p><a href="#"><strong>Architectural signage</strong></a><br />
 						Materials with optimum durability Products and wayfinding solutions<br />
 						<a href="#">www.marcal.fr</a></p>
-					</li>-->
-				</ul>
+					</li>
+				</ul>-->
+                <?php echo $this->googleadsense->createAdSense(2); ?>
+                
         	</div>
         <?php endif; ?>
     
@@ -115,7 +117,7 @@
                     
                     <div class="sponsoredlisting googleadsonly">
                     	<h3>Sponsored Listing</h3>
-                        <ul>
+                      <!--  <ul>
                         	<li>
                             	<p><a href="#"><strong>Jobs Australia</strong></a></p>
                                 <p>5 urgent open positions. Apply now! Jobs Australia</p>
@@ -131,7 +133,8 @@
                                 <p>Materials with optimum durability Products and wayfinding solutions</p>
                                 <p><a class="smaller" href="#">www.marcal.fr</a></p>
                             </li>
-                        </ul>
+                        </ul>-->
+                        <?php echo $this->googleadsense->createAdSense(3,0); ?>
                     </div>
                     
                     <div class="minieditorsideinfo">
