@@ -27,16 +27,19 @@
 class Googleadsense {
 
 	private $mImageTest;
-
+	private $CI;
+	
 	public function __construct() {
 
 		// initializing some member variables
 		$this->mImageTest = 0;
-		
+		$this->CI = &get_instance();
 	}
 
 	public function createAdSense($type, $imageFlag = 0) {
-		$this->mImageTest = $imageFlag;
+		$imageFlag = $this->_isTestingEnv();
+		// call_debug($imageFlag);
+		$this->mImageTest = $imageFlag; // read from db
 
 		switch ($type) {
 			case 1:
@@ -60,7 +63,7 @@ class Googleadsense {
 		$imgUrl = base_url("images/googleadsenseimgs/textonly/adsense_185665_adformat-text_468x60_en.png");
 		$output = sprintf('<img  src="%s" />', $imgUrl);
 		
-		if($imageFlag)
+		if(! $imageFlag)
 			$output = $this->_generateAdSenseScript(468, 60, '468x60_as');
 			
 		return trim($output);
@@ -71,7 +74,7 @@ class Googleadsense {
 		$imgUrl = base_url("images/googleadsenseimgs/textonly/adsense_185665_adformat-text_250x250_en.png");
 		$output = sprintf('<img  src="%s" />', $imgUrl);
 		
-		if($imageFlag)
+		if(! $imageFlag)
 			$output = $this->_generateAdSenseScript(250, 250,'250x250_as');
 			
 		return trim($output);
@@ -82,7 +85,7 @@ class Googleadsense {
 		$imgUrl = base_url("images/googleadsenseimgs/textonly/adsense_185665_adformat-text_120x240_en.png");
 		$output = sprintf('<img  src="%s" />', $imgUrl);
 
-		if($imageFlag)
+		if(! $imageFlag)
 			$output = $this->_generateAdSenseScript(120, 240, '120x240_as');
 			
 		return trim($output);
@@ -94,7 +97,7 @@ class Googleadsense {
 		$output .= '<!-- Start Here -->';
 		$output .= '<script type="text/javascript"><!--';
 		$output .= 'google_adtest = "on";';
-		$output .= 'google_ad_client = "pub-0000000000000000";';		
+		$output .= 'google_ad_client = "pub-0000000000000000";'; // @todo: this should be retrieve from the db
 		//$output .= '/* 468x60, created 7/17/08 */';
 		//$output .= 'google_ad_slot = "7112975069";';
 		$output .= sprintf('google_ad_width = %s;', $width);
@@ -109,6 +112,21 @@ class Googleadsense {
 		
 		return trim($output);
 		
+	}
+	
+	private function _isTestingEnv() {
+		
+		$strQry = sprintf("SELECT * FROM `settings` WHERE `setting`='%s'", "google_ad_test_env");
+		$settings = $this->CI->db->query($strQry)->result();
+		
+		foreach($settings as $setting) {
+			if($setting->value == '1')
+				return 1;
+			else
+				return 0;
+		}
+			
+		return 0;
 	}
 
 }
