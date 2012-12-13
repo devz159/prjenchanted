@@ -11,11 +11,9 @@ class Panel extends CI_Controller {
 		$this->sessionbrowser->getInfo($params);
 		$arr = $this->sessionbrowser->mData;
 		
-		//call_debug($arr);
-		
 		// authorizes access
 		authUser(array('section' => 'login/admin', 'sessvar' => array('admin_uname', 'admin_islog', 'admin_fullname')));
-				
+
 		// sets default prefs
 		$this->_mConfig = array('full_tag_open' => '<div class="pagination">', 'full_tag_close' => '</div>', 'first_link' => 'First', 'last_link' => 'Last', 'next_link' => '»', 'prev_link' => '«');
 
@@ -301,11 +299,24 @@ class Panel extends CI_Controller {
 			$strQry = sprintf("UPDATE settings SET `value`='%s' WHERE setting LIKE '%cshowaffiliateprogram%c'", $showadsonbusprofpage, 37,37);
 			$this->db->query($strQry);
 			
+			// google adsense account
+			$strQry = sprintf("UPDATE settings SET `value`='%s' WHERE setting LIKE '%cgoogle_ad_client%c'", $this->input->post('googleadsenseaccnt'), 37, 37);
+			$this->db->query($strQry);
+			
+			// google adsense test environment
+			$googleadsense = ($this->input->post('googleadsensetestenv')) ? '1' : '0';
+			$strQry = sprintf("UPDATE settings SET `value`='%s' WHERE setting LIKE '%cgoogle_ad_test_env%c'", $googleadsense, 37,37);
+			$this->db->query($strQry);
+			
+			// google adsense enable plugin
+			$enablegoogleadsense = ($this->input->post('googleadsenseenable')) ? '1' : '0';
+			$strQry = sprintf("UPDATE settings SET `value`='%s' WHERE setting LIKE '%cgoogle_adsense_enable%c'", $enablegoogleadsense, 37,37);
+			$this->db->query($strQry);
+			
 			$this->_updatedsettings();
 			
 		}
-		
-		
+				
 	}
 	
 	private function _updatedsettings() {

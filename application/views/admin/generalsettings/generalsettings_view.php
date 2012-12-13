@@ -82,7 +82,15 @@
 </fieldset>
 
 <fieldset><legend>Paypal</legend>
-	<label for="turnonpaypalsandbox">Turn on Paypal sandbox environment<input id="turnonpaypalsandbox" <?php echo ($mSettings['paypalsandbox'] == '1') ? 'checked="checked"' : '' ?> type="checkbox" name="showaffiliateprogram" value="1" />
+	<label for="turnonpaypalsandbox">Turn on Paypal sandbox environment<input id="turnonpaypalsandbox" <?php echo ($mSettings['paypalsandbox'] == '1') ? 'checked="checked"' : '' ?> type="checkbox" name="showaffiliateprogram" value="1" /></label>
+</fieldset>
+
+<fieldset>
+<legend>Google Adsense</legend>
+<label><input type="checkbox" name="googleadsenseenable" <?php echo ($mSettings['google_adsense_enable'] == '1') ? 'checked="checked"' : '' ?> value="1" />Enable Google AdSense</label>
+<label><input type="checkbox" <?php echo ($mSettings['google_ad_test_env'] == '1') ? 'checked="checked"' : '' ?> name="googleadsensetestenv" value="1" /> Turn on test environment </label>
+<label>Adsense Account
+  <input type="text" name="googleadsenseaccnt" value="<?php echo $mSettings['google_ad_client'] ;?>" /></label>
 </fieldset>
 <p><input class="submitbtn" type="submit" value="Save Settings" /></p>
 <div class="clearthis"></div>
