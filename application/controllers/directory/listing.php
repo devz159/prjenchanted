@@ -513,8 +513,10 @@ class Listing extends CI_Controller {
 		$id = ($this->uri->segment(5) != "") ? $this->uri->segment(5) : '';		
 		$data['listing'] = $this->_getListingDetails($id); // gets the selected listing		
 		
-		$this->db->query('CALL sp_categories_count()');
-		$db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;');
+		// $this->db->query('CALL sp_categories_count()');
+		$this->db->query('CALL sp_filtered_categories_count()');
+		//$db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;');
+		$db = $this->db->query("SELECT COUNT(mcat_id) AS `count`, mcat_id, maincategory FROM tmp_filtered_categ_count GROUP BY mcat_id");
 		$records = $db->result();
 				
 		$data['mapdata'] = $this->_mapdata($data['listing']);
@@ -523,7 +525,7 @@ class Listing extends CI_Controller {
 		// 		on_watch($data['sbsettings']);
 		$data['favorites'] = getFavItemsResultSet();
 		$data['maincategories'] = $records; //$this->_loadCategories();
-		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id GROUP BY s.name")->result();
+		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id WHERE l.status='1' AND l.expired='0' GROUP BY s.name")->result();
 		$data['main_content'] = 'directory/listing/listing_details_view';
 		$this->load->view('includes/directory/template', $data);
 		 	
