@@ -69,7 +69,7 @@ class Home extends CI_Controller {
 		$data = array(
 						'list_title' => '',
 						'year' => '2012',
-						'site_url' => anchor(base_url(), 'aus-newcastle', array('target' => "_blank"))
+						'site_url' => anchor(base_url("directory"), 'aus-newcastle', array('target' => "_blank"))
 				);
 
 		$template = $this->parser->parse('includes/templates/payments/emailConfmStandaPayment_tpl', $data, TRUE);

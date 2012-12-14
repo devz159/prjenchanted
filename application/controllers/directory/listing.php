@@ -560,9 +560,8 @@ class Listing extends CI_Controller {
 		
 	}
 	
-	private function _sendListingEmail($params = array(), $flag = TRUE) {
-		
-		/*
+	/**
+	 * backup _sendListingEmail
 		$receiver =  'kenn_vall@yahoo.com';//$this->input->post('advr');
 		$subject = 'Congratulation You have successfully added your listing'; // @neetodo: hardcoded message.
 		
@@ -589,20 +588,25 @@ class Listing extends CI_Controller {
 		}
 		
 		return TRUE;
-		*/
+	*/	
+	
+	private function _sendListingEmail($params = array(), $flag = TRUE) {
 		
 		// USE Emailutil ON THIS PART
 		$subject = 'Congratulation You have successfully added your listing';
 		$msg = (array_key_exists('msg', $param)) ? $param['msg'] : 'My message';
-		$receiver = $this->input->post('email');
+		$receiver = 'kenn_vall@yahoo.com';//$this->input->post('advr'); // @todo: remove hardcoded email add
 		$sender = '';
 		
 		// template data
 		$tpl = array(
-					'list_title' => '',
+					'list_title' => $params['adTitle'],
 					'year' => '2012',
-					'site_url' => anchor(base_url(), 'aus-newcastle')
+					'site_url' => anchor(base_url("directory"), 'aus-newcastle', array('target' => "_blank"))
 				);
+		
+		$this->load->library('parser');
+		$msg = $this->parser->parse('includes/templates/payments/emailConfmStandaPayment_tpl', $tpl, TRUE);
 		
 		$config = array(
 			'sender' => $sender,
