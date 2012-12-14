@@ -561,6 +561,8 @@ class Listing extends CI_Controller {
 	}
 	
 	private function _sendListingEmail($params = array(), $flag = TRUE) {
+		
+		/*
 		$receiver =  'kenn_vall@yahoo.com';//$this->input->post('advr');
 		$subject = 'Congratulation You have successfully added your listing'; // @neetodo: hardcoded message.
 		
@@ -573,7 +575,7 @@ class Listing extends CI_Controller {
 		$this->load->library('email', $this->_configEmail());
 		$this->email->set_newline("\r\n");
 		
-		$this->email->from('your@example.com', 'Newcastle-Hunter Directory'); // @neerevisit: (FROM) this should retrived from either config.php or db
+		$this->email->from('your@example.com', ''); // @neerevisit: (FROM) this should retrived from either config.php or db
 		$this->email->to($receiver);
 		
 		$this->email->subject($subject);
@@ -585,9 +587,42 @@ class Listing extends CI_Controller {
 				return FALSE;
 			}		
 		}
-				
-		return TRUE;
 		
+		return TRUE;
+		*/
+		
+		// USE Emailutil ON THIS PART
+		$subject = 'Congratulation You have successfully added your listing';
+		$msg = (array_key_exists('msg', $param)) ? $param['msg'] : 'My message';
+		$receiver = $this->input->post('email');
+		$sender = '';
+		
+		// template data
+		$tpl = array(
+					'list_title' => '',
+					'year' => '2012',
+					'site_url' => anchor(base_url(), 'aus-newcastle')
+				);
+		
+		$config = array(
+			'sender' => $sender,
+  			'receiver' => $receiver,
+  			'from_name' => 'Newcastle-Hunter Directory', // OPTIONAL  			
+  			'subject' => $subject, // OPTIONAL
+  			'msg' => $msg, // OPTIONAL
+  			'email_temp_account' => TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
+		);
+		
+		$this->load->library('emailutil', $config);
+		
+		if($flag) {
+			if(! $this->emailutil->send()) {
+				echo $this->email->print_debugger();
+				return FALSE;
+			}
+		}
+		
+		return TRUE;
 	}
 		
 	private function checkIfSignedUp() {
