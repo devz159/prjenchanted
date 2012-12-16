@@ -90,7 +90,7 @@ class Paypal extends CI_Controller  {
 		// authorizes access. to secure if the current session is valid
 		authUser(array('section' => 'login', 'sessvar' => array('advr_uname', 'advr_islog', 'advr_fullname')));
 		
-		$data['main_content'] = 'paypal/thankyoupage_view';
+		$data['main_content'] = 'includes/templates/thankyou/paypal_thank_you_page_tpl'; //'paypal/thankyoupage_view';
 		$this->load->view('includes/directory/template_b', $data);
 
 	}
