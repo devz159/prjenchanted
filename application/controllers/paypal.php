@@ -62,7 +62,14 @@ class Paypal extends CI_Controller  {
 			// check that payment_amount/payment_currency are correct
 			// process payment
 			if($_POST['payment_status'] == 'Completed'  && ($this->_isExist_paypal_trnx_id($txn_id) == FALSE)  && $pay_receiver == $receiver_email && $payment_amount == $this->_getTotalAmount($item_name)) {
-				$this->_insertOrders($_POST);
+				if($this->_insertOrders($_POST)) {
+					// send email payment confirmation
+					$data = array(
+								'receiver' => $payer_email,
+								'item_name' => $item_name
+							);
+					$this->_sendPaypalEmail($data);
+				}
 			}
 		}
 		else if (strcmp ($res, "INVALID") == 0) {
@@ -171,8 +178,10 @@ class Paypal extends CI_Controller  {
 		return TRUE;
 		
 	}
-	private function _sendPaypalEmail($params = array(), $flag = TRUE) {
-		$receiver =  'kenn_vall@yahoo.com';//$this->input->post('advr');
+	
+	/**
+	 * 
+	 $receiver =  'kenn_vall@yahoo.com';//$this->input->post('advr');
 		$subject = 'Congratulation You have successfully paid using PayPal'; // @neetodo: hardcoded message.
 	
 		// preps some data/info here
@@ -198,10 +207,81 @@ class Paypal extends CI_Controller  {
 		}
 	
 		return TRUE;
+	 */
 	
+	
+	private function _sendPaypalEmail($params = array(), $flag = TRUE) {
+
+		// USE Emailutil ON THIS PART
+		$subject = 'Congratulation You have successfully added your listing';
+		$msg = (array_key_exists('msg', $param)) ? $param['msg'] : 'My message';
+		$receiver = 'kenn_vall@yahoo.com'; //$receiver = $params['receiver'];
+		$sender = '';
+		
+		// retrieves the listing name from the db;
+		$listing_name = $this->_getListingName($params['item_name']);
+		$advertiser_name = $this->_getAdvertiserName($params['receiver']);
+		
+		// template data
+		$tpl = array(
+					'list_title' => $listing_name,
+					'year' => '2012',
+					'customer' => $advertiser_name,
+					'site_url' => anchor(base_url("directory"), 'aus-newcastle', array('target' => "_blank"))
+				);
+		
+		$this->load->library('parser');
+		$msg = $this->parser->parse('includes/templates/payments/emailConfmStandaPayment_tpl', $tpl, TRUE);
+		
+		$config = array(
+			'sender' => $sender,
+  			'receiver' => $receiver,
+  			'from_name' => 'Newcastle-Hunter Directory', // OPTIONAL  			
+  			'subject' => $subject, // OPTIONAL
+  			'msg' => $msg, // OPTIONAL
+  			'email_temp_account' => TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
+		);
+		
+		$this->load->library('emailutil', $config);
+		
+		if($flag) {
+			if(! $this->emailutil->send()) {
+				echo $this->email->print_debugger();
+				return FALSE;
+			}
+		}
+		
+		return TRUE;
+		
+	}
+	
+	private function _getListingName($lstid) {
+		
+		$strQry = sprintf("SELECT * FROM listing WHERE lst_id=%d", $lstid);		
+		$record = $this->db->query($strQry)->result();
+		
+		foreach($record as $rec):
+			return trim($rec->title);
+		endforeach;
+		
+		return '';
+	}
+	
+	private function _getAdvertiserName($email) {
+		
+		$strQry = sprintf("SELECT fname, lname FROM advertiser WHERE email=%s", $email);
+		$record = $this->db->query($strQry)->result();
+		
+		foreach($record as $rec) :
+			return trim(sprintf("%s %s"), $rec->fname, $rec->lname);
+		endforeach;
+		
+		return;
+		
 	}
 	
 	private function _update_listing($lst_id) {	 // this should be in a call_user_func
+		
 		$this->mdldata->reset(); // resets mdldata parameters
 		$strQry = sprintf("UPDATE listing SET package='1', status='1', expired='0' WHERE lst_id=%d", $lst_id);
 		$params['querystring'] = $strQry;
@@ -210,6 +290,7 @@ class Paypal extends CI_Controller  {
 			return FALSE;
 		
 		return TRUE;
+		
 	}
 	
 	private function _getTotalAmount($itemcode) {		

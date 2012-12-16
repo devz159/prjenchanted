@@ -602,6 +602,7 @@ class Listing extends CI_Controller {
 		$tpl = array(
 					'list_title' => $params['adTitle'],
 					'year' => '2012',
+					'customer' => $this->_mFullName,
 					'site_url' => anchor(base_url("directory"), 'aus-newcastle', array('target' => "_blank"))
 				);
 		
@@ -611,7 +612,7 @@ class Listing extends CI_Controller {
 		$config = array(
 			'sender' => $sender,
   			'receiver' => $receiver,
-  			'from_name' => 'Newcastle-Hunter Directory', // OPTIONAL  			
+  			'from_name' => 'Newcastle-Hunter Directory', // OPTIONAL  // @todo: retrieve this from db			
   			'subject' => $subject, // OPTIONAL
   			'msg' => $msg, // OPTIONAL
   			'email_temp_account' => TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
