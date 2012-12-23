@@ -135,6 +135,7 @@ class Paypal extends CI_Controller  {
 		
 		$created = date('Y-m-d H:m:i');
 		
+		/*
 		$strQry = sprintf("INSERT INTO orders SET itemnumber='%s', email='%s', amount=%d, status='%s', state='%s', zip_code='%s', address='%s', country='%s', paypal_trans_id='%s', created_at='%s'",
 							$itemnumber,
 							$payer_email,
@@ -150,6 +151,26 @@ class Paypal extends CI_Controller  {
 		$this->load->model('mdldata');
 		$params['querystring'] = $strQry;
 		if(! $this->mdldata->insert($params)) // inserts into orders table
+			return FALSE;
+		*/
+		$spParams = array(
+			'itemnumber' => $itemnumber,
+			'email' => $payer_email,
+			'amount' => $amount,
+			'status' => $status,
+			'state' => $address_state,
+			'zip' => $address_zip,
+			'city' => $address_city,
+			'country' => $address_country,
+			'paypaltrxnid' => $paypal_trans_id,
+			'created' => $created
+		);
+		
+		// executes the store procedure
+		$this->db->query("CALL sp_insert_orders(?,?,?,?,?,?,?,?,?,@insertorderstatus)", $spParams);
+		
+		// checks if the stored procedure executed successfully
+		if($this->db->query("SELECT @insertorderstatus AS `status` WHERE `status`=1")->num_rows() == 0)
 			return FALSE;
 		
 		if(! $this->_add_advertiser_listing($advr, $lst_id, $created, $payer_email))
