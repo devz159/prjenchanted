@@ -594,7 +594,7 @@ class Listing extends CI_Controller {
 		
 		// USE Emailutil ON THIS PART
 		$subject = 'Congratulation You have successfully added your listing';
-		$msg = (array_key_exists('msg', $param)) ? $param['msg'] : 'My message';
+		$msg = (array_key_exists('msg', $params)) ? $params['msg'] : 'My message';
 		$receiver = 'kenn_vall@yahoo.com';//$this->input->post('advr'); // @todo: remove hardcoded email add
 		$sender = '';
 		

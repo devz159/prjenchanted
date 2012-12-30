@@ -82,7 +82,23 @@ class Paypal extends CI_Controller  {
 		
 	}
 	
-public function process() {
+	public function test() {
+		
+		// calls stored procedure
+		$this->db->query("CALL sp_test(1)");
+		$rec = $this->db->query("SELECT @insertorderstatus AS `status`")->result();
+		
+		call_debug($rec, FALSE);
+		foreach ($rec as $r) {
+			if($r->status == 0)
+				echo 'record is zero';
+			else
+				echo 'record is good';
+
+		}		
+	}
+	
+	public function process() {
 
 
 		// STEP 1: Read POST data
@@ -115,7 +131,7 @@ public function process() {
 
 		// STEP 2: Post IPN data back to paypal to validate
 
-		$ch = curl_init('https://www.sandbox.paypal.com/cgi-bin/webscr');
+		$ch = curl_init(Paypalsettings::env()/*'https://www.sandbox.paypal.com/cgi-bin/webscr'*/);
 		curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
@@ -123,7 +139,7 @@ public function process() {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 		curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Host: www.sandbox.paypal.com'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(Paypalsettings::envHost()/*'Host: www.sandbox.paypal.com'*/));
 
 		// In wamp like environments that do not come bundled with root authority certificates,
 		// please download 'cacert.pem' from "http://curl.haxx.se/docs/caextract.html" and set the directory path
@@ -145,10 +161,10 @@ public function process() {
 			// check that receiver_email is your Primary PayPal email
 			// check that payment_amount/payment_currency are correct
 			// process payment
-			
+				
 			//@mnctodo: open db to get paypal business accnt.
 			$pay_receiver = 'kennva_1341307061_biz@gmail.com';
-			
+				
 			// assign posted variables to local variables
 			$item_name = $_POST['item_name1'];
 			$item_number = $_POST['item_number1'];
@@ -158,38 +174,32 @@ public function process() {
 			$txn_id = $_POST['txn_id'];
 			$receiver_email = $_POST['receiver_email'];
 			$payer_email = $_POST['payer_email'];
-			
-			// $strQry = sprintf("INSERT INTO testipn SET `status`='%s'", $txn_id . '>>' . $item_name . '>>' . $item_number . '>>' . $receiver_email . '>>' . $payer_email . '>>' . $payment_status . '>>' . $payment_currency);
-			// $this->db->query($strQry);
-			
-			// -->check whether the payment_status is Completed
-			// -->check that txn_id has not been previously processed
-			// -->check that receiver_email is your Primary PayPal email
-			// -->check that payment_amount/payment_currency are correct
-			// process payment			
-			if($_POST['payment_status'] == 'Completed' 
-				&& ($this->_isExist_paypal_trnx_id($txn_id) == FALSE) 
-			 	&& $pay_receiver == $receiver_email 
-			 	&& $payment_amount == $this->_getTotalAmount($item_name)
-			 	&& $payment_currency == $this->config->item('currency_code')) {
 				
+			// process payment
+			if($_POST['payment_status'] == 'Completed'
+			&& ($this->_isExist_paypal_trnx_id($txn_id) == FALSE)
+			&& $pay_receiver == $receiver_email
+			&& $payment_amount == $this->_getTotalAmount($item_name)
+			&& $payment_currency == $this->config->item('currency_code')) {
+
 				if($this->_insertOrders($_POST)) {
 					// send email payment confirmation
 					$data = array(
 								'receiver' => $payer_email,
 								'item_name' => $item_name
 					);
+					log_message("error", "Inserted record succesfully.");
 					$this->_sendPaypalEmail($data);
 				} else {
 					log_message('error', "FAILED INSERTING RECORD into orders table.");
 				}
 			}
-			
+				
 		} else if (strcmp ($res, "INVALID") == 0) {
 			// log for manual investigation
 		}
 	}
-	
+
 	public function thankyou() {
 		// clears the content of the cart library. this is very necessary
 		$this->load->library('cart');
@@ -284,9 +294,13 @@ public function process() {
 		// checks if the stored procedure executed successfully
 		//if($this->db->query("SELECT @insertorderstatus AS `status` WHERE `status`=1")->num_rows() == 0)
 			//return FALSE;			
-				
-		if(! $this->_add_advertiser_listing($advr, $lst_id, $created, $payer_email))
-			return FALSE;
+		//$procStatus = $this->db->query("SELECT @insertorderstatus AS `status`")->result();
+		
+		// checks the status of the sp_insert_orders
+
+		// this has been dropped (advertiser_listing table won't be used anymore)
+		//if(! $this->_add_advertiser_listing($advr, $lst_id, $created, $payer_email))
+			//return FALSE;
 		
 		if(! $this->_update_listing($lst_id))
 			return FALSE;
@@ -347,7 +361,7 @@ public function process() {
 
 		// USE Emailutil ON THIS PART
 		$subject = 'Congratulation You have successfully added your listing';
-		$msg = (array_key_exists('msg', $param)) ? $param['msg'] : 'My message';
+		$msg = (array_key_exists('msg', $params)) ? $params['msg'] : 'My message';
 		$receiver = 'kenn_vall@yahoo.com'; //$receiver = $params['receiver'];
 		$sender = '';
 		
