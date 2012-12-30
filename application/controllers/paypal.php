@@ -16,7 +16,7 @@ class Paypal extends CI_Controller  {
 		
 	}
 	
-	public function process() {
+	public function xprocess() {
 		
 		//@mnctodo: open db to get paypal business accnt.
 		$pay_receiver = 'kennva_1341307061_biz@gmail.com';
@@ -82,7 +82,7 @@ class Paypal extends CI_Controller  {
 		
 	}
 	
-public function test() {
+public function process() {
 
 
 		// STEP 1: Read POST data
@@ -145,19 +145,46 @@ public function test() {
 			// check that receiver_email is your Primary PayPal email
 			// check that payment_amount/payment_currency are correct
 			// process payment
-
+			
+			//@mnctodo: open db to get paypal business accnt.
+			$pay_receiver = 'kennva_1341307061_biz@gmail.com';
+			
 			// assign posted variables to local variables
-			$item_name = $_POST['item_name'];
-			$item_number = $_POST['item_number'];
-			$payment_status = $_POST['payment_status'];
-			$payment_amount = $_POST['mc_gross'];
+			$item_name = $_POST['item_name1'];
+			$item_number = $_POST['item_number1'];
+			$payment_status = $_POST['payment_status']; // Undefined index
+			$payment_amount = $_POST['mc_gross_1'];
 			$payment_currency = $_POST['mc_currency'];
 			$txn_id = $_POST['txn_id'];
 			$receiver_email = $_POST['receiver_email'];
 			$payer_email = $_POST['payer_email'];
 			
-			$strQry = sprintf("INSERT INTO testipn SET `status`='%s'", $txn_id . " -- " . $item_name);
-			$this->db->query($strQry);
+			// $strQry = sprintf("INSERT INTO testipn SET `status`='%s'", $txn_id . '>>' . $item_name . '>>' . $item_number . '>>' . $receiver_email . '>>' . $payer_email . '>>' . $payment_status . '>>' . $payment_currency);
+			// $this->db->query($strQry);
+			
+			// -->check whether the payment_status is Completed
+			// -->check that txn_id has not been previously processed
+			// -->check that receiver_email is your Primary PayPal email
+			// -->check that payment_amount/payment_currency are correct
+			// process payment
+			
+			if($_POST['payment_status'] == 'Completed' 
+				&& ($this->_isExist_paypal_trnx_id($txn_id) == FALSE) 
+			 	/*&& $pay_receiver == $receiver_email 
+			 	&& $payment_amount == $this->_getTotalAmount($item_name)
+			 	&& $payment_currency == 'AUD'*/) {
+				
+				if($this->_insertOrders($_POST)) {
+					// send email payment confirmation
+					$data = array(
+								'receiver' => $payer_email,
+								'item_name' => $item_name
+					);
+					$this->_sendPaypalEmail($data);
+				} else {
+					log_message('error', "FAILED INSERTING RECORD into orders table.");
+				}
+			}
 			
 		} else if (strcmp ($res, "INVALID") == 0) {
 			// log for manual investigation
@@ -253,12 +280,12 @@ public function test() {
 		);
 		
 		// executes the store procedure
-		$this->db->query("CALL sp_insert_orders(?,?,?,?,?,?,?,?,?,@insertorderstatus)", $spParams);
+		$this->db->query("CALL sp_insert_orders(?,?,?,?,?,?,?,?,?,?,@insertorderstatus)", $spParams);
 		
 		// checks if the stored procedure executed successfully
-		if($this->db->query("SELECT @insertorderstatus AS `status` WHERE `status`=1")->num_rows() == 0)
-			return FALSE;
-		
+		//if($this->db->query("SELECT @insertorderstatus AS `status` WHERE `status`=1")->num_rows() == 0)
+			//return FALSE;			
+				
 		if(! $this->_add_advertiser_listing($advr, $lst_id, $created, $payer_email))
 			return FALSE;
 		
