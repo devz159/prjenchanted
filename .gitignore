@@ -1,0 +1,2 @@
+# this is my ignore file list
+application/logs/*log-[0-9]*.php

@@ -166,13 +166,12 @@ public function process() {
 			// -->check that txn_id has not been previously processed
 			// -->check that receiver_email is your Primary PayPal email
 			// -->check that payment_amount/payment_currency are correct
-			// process payment
-			
+			// process payment			
 			if($_POST['payment_status'] == 'Completed' 
 				&& ($this->_isExist_paypal_trnx_id($txn_id) == FALSE) 
-			 	/*&& $pay_receiver == $receiver_email 
+			 	&& $pay_receiver == $receiver_email 
 			 	&& $payment_amount == $this->_getTotalAmount($item_name)
-			 	&& $payment_currency == 'AUD'*/) {
+			 	&& $payment_currency == $this->config->item('currency_code')) {
 				
 				if($this->_insertOrders($_POST)) {
 					// send email payment confirmation
