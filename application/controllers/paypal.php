@@ -14,6 +14,8 @@ class Paypal extends CI_Controller  {
 		$this->_mUserName = '';
 		$this->_mMyLoginError = null;
 		
+		// @todo: firePHP
+		fb::setEnabled(TRUE);
 	}
 	
 	public function xprocess() {
@@ -83,7 +85,7 @@ class Paypal extends CI_Controller  {
 	}
 	
 	public function test() {
-		
+		/*
 		// calls stored procedure
 		$this->db->query("CALL sp_test(1)");
 		$rec = $this->db->query("SELECT @insertorderstatus AS `status`")->result();
@@ -95,7 +97,10 @@ class Paypal extends CI_Controller  {
 			else
 				echo 'record is good';
 
-		}		
+		}
+		*/
+		
+		
 	}
 	
 	public function process() {
