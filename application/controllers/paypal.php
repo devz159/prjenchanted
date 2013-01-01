@@ -13,9 +13,9 @@ class Paypal extends CI_Controller  {
 		$this->_mFullName;
 		$this->_mUserName = '';
 		$this->_mMyLoginError = null;
+
+		//fb::setEnabled(TRUE);
 		
-		// @todo: firePHP
-		fb::setEnabled(TRUE);
 	}
 	
 	public function xprocess() {
@@ -85,22 +85,16 @@ class Paypal extends CI_Controller  {
 	}
 	
 	public function test() {
-		/*
-		// calls stored procedure
-		$this->db->query("CALL sp_test(1)");
-		$rec = $this->db->query("SELECT @insertorderstatus AS `status`")->result();
-		
-		call_debug($rec, FALSE);
-		foreach ($rec as $r) {
-			if($r->status == 0)
-				echo 'record is zero';
-			else
-				echo 'record is good';
 
-		}
-		*/
 		
+		$data = array(
+								'receiver' => "kennva_1341307061_biz@gmail.com",
+								'item_name' => "Premium Listing ni bai"
+					);
+					//log_message("error", "Inserted record succesfully.");
+					$this->_sendPaypalEmail($data);
 		
+
 	}
 	
 	public function process() {
@@ -186,7 +180,9 @@ class Paypal extends CI_Controller  {
 			&& $pay_receiver == $receiver_email
 			&& $payment_amount == $this->_getTotalAmount($item_name)
 			&& $payment_currency == $this->config->item('currency_code')) {
-
+				
+				log_message('error', 'payment success... entering _insertOrders method');
+				
 				if($this->_insertOrders($_POST)) {
 					// send email payment confirmation
 					$data = array(
@@ -262,27 +258,10 @@ class Paypal extends CI_Controller  {
 		
 		$created = date('Y-m-d H:m:i');
 		
-		/*
-		$strQry = sprintf("INSERT INTO orders SET itemnumber='%s', email='%s', amount=%d, status='%s', state='%s', zip_code='%s', address='%s', country='%s', paypal_trans_id='%s', created_at='%s'",
-							$itemnumber,
-							$payer_email,
-							$amount,
-							$status,
-							$address_state,
-							$address_zip,
-							$address_city,
-							$address_country,
-							$paypal_trans_id,
-							$created
-						);
-		$this->load->model('mdldata');
-		$params['querystring'] = $strQry;
-		if(! $this->mdldata->insert($params)) // inserts into orders table
-			return FALSE;
-		*/
+		
 		$spParams = array(
 			'itemnumber' => $itemnumber,
-			'email' => $payer_email,
+			'email' => mysql_real_escape_string($payer_email),
 			'amount' => $amount,
 			'status' => $status,
 			'state' => $address_state,
@@ -368,7 +347,7 @@ class Paypal extends CI_Controller  {
 		$subject = 'Congratulation You have successfully added your listing';
 		$msg = (array_key_exists('msg', $params)) ? $params['msg'] : 'My message';
 		$receiver = 'kenn_vall@yahoo.com'; //$receiver = $params['receiver'];
-		$sender = '';
+		$sender = 'kennvall@gmail.com';
 		
 		// retrieves the listing name from the db;
 		$listing_name = $this->_getListingName($params['item_name']);
@@ -390,8 +369,8 @@ class Paypal extends CI_Controller  {
   			'receiver' => $receiver,
   			'from_name' => 'Newcastle-Hunter Directory', // OPTIONAL  			
   			'subject' => $subject, // OPTIONAL
-  			'msg' => $msg, // OPTIONAL
-  			'email_temp_account' => TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
+  			'msg' => $msg/*, // OPTIONAL
+  			'email_temp_account' => FALSE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).*/ 			
 		);
 		
 		$this->load->library('emailutil', $config);
@@ -421,7 +400,7 @@ class Paypal extends CI_Controller  {
 	
 	private function _getAdvertiserName($email) {
 		
-		$strQry = sprintf("SELECT fname, lname FROM advertiser WHERE email=%s", $email);
+		$strQry = sprintf("SELECT fname, lname FROM advertiser WHERE email='%s'", mysql_real_escape_string($email));
 		$record = $this->db->query($strQry)->result();
 		
 		foreach($record as $rec) :

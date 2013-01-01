@@ -1,6 +1,6 @@
 <?php 
 
-require_once "/firephp/fb.php";
+require_once "firephp/fb.php";
 	
 class Cifb extends FB {
 	
