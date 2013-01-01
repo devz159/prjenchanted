@@ -66,10 +66,10 @@ class Emailutil {
 		if(!array_key_exists('receiver', $params)) // no email for receiver, then exit from the method
 			return FALSE;
 		
-		if(!array_key_exists('usersettings', $params))
+		if(array_key_exists('usersettings', $params))
 			$this->_mUserEmailSettings = TRUE;
 		
-		if(array_key_exists('email_temp_account', $params))
+		if(array_key_exists('email_temp_account', $params)) // @todo: add check for its value
 			$this->_mEmailTemporary = TRUE;
 		
 		// preps some data/info and variables here
@@ -81,7 +81,7 @@ class Emailutil {
 		$msg = '';		
 		$msg .= (array_key_exists('msg', $params) ? $params['msg'] : ' --- No msg provided ---');
 		
-		// end prep
+		// end prep 
 		
 		// loads the email class
 		$this->CI->load->library('email', ($this->_mEmailTemporary) ? $this->_tmpEmailAccount() : $this->_loadDefaultEmailSettings(($this->_mUserEmailSettings) ? $params['usersettings'] : array() ));
@@ -111,7 +111,7 @@ class Emailutil {
 	public function send() {
 		
 		if($this->CI->email->send() === FALSE) {
-			/*$this->_mError = $this->CI->email->print_debugger();*/ on_watch('watching');
+			/*$this->_mError = $this->CI->email->print_debugger();on_watch('watching');*/ 
 			return FALSE;
 		}		
 		
