@@ -831,10 +831,8 @@ class Listing extends CI_Controller {
 			case 'premium':
 				$package = '1';
 				
-		}
-		
+		}		
 		// end preparing data
-// 		call_debug($package, FALSE);
 		
 		$this->load->model('mdldata');
 		
