@@ -16,6 +16,7 @@ class Listing extends CI_Controller {
 		$this->load->library('favlist');		
 		$this->load->library('settings');
 		
+		fb::setEnabled(TRUE);
 	}
 	 
 	 public function index() {
@@ -194,7 +195,6 @@ class Listing extends CI_Controller {
 				if($this->_addListingToDB()) {
 					// call custom email helper/library
 					$this->cart->show();				
-// 					$this->_sendListingEmail($this->cart->_mData);
 
 					// transfer uploaded images from 'uploaded' folder into 'ads' folder
 					// $this->imagemanager->manage($array, $source, $destination);
@@ -218,7 +218,7 @@ class Listing extends CI_Controller {
 					'adRecurrentType' => '',
 					'adPaypal' => ''
 			);
-			
+									
 			$this->load->library('cart');
 			
 			if(!$this->cart->insert($params)) exit('Error appending values into session variables.');
@@ -226,8 +226,9 @@ class Listing extends CI_Controller {
 			if($this->_addListingToDB(FALSE)) { // returns TRUE if successfull, FALSE otherwise
 				// call custom email helper/library
 				$this->cart->show();
-				$this->_sendListingEmail($this->cart->_mData);
 				
+				$this->_sendListingEmail($this->cart->_mData);
+				//call_debug($params);
 				// transfer uploaded images from 'uploaded' folder into 'ads' folder
 				// $this->imagemanager->manage($array, $source, $destination);
 				$this->load->library('imagemanager');
@@ -614,11 +615,18 @@ class Listing extends CI_Controller {
   			'receiver' => $receiver,
   			'from_name' => 'Newcastle-Hunter Directory', // OPTIONAL  // @todo: retrieve this from db			
   			'subject' => $subject, // OPTIONAL
-  			'msg' => $msg, // OPTIONAL
-  			'email_temp_account' => TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
+  			'msg' => $msg , // OPTIONAL
+  			'email_temp_account' => isLocalEnv() //TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
 		);
 		
 		$this->load->library('emailutil', $config);
+		
+		$bug = array(
+				'params' => $params,
+				'config' => $config
+			);
+		
+		fb::log($bug, "listing->_sendListingEmail");
 		
 		if($flag) {
 			if(! $this->emailutil->send()) {
@@ -845,7 +853,7 @@ class Listing extends CI_Controller {
 							'subcategory' => $cart['adCategories'],
 							'images' => $cart['adImages'],
 							'advr' => $this->_getUserID(), // advertiser | int
-							'description' => mysql_escape_string($cart['adDescription']),
+							'description' => mysql_real_escape_string($cart['adDescription']),
 							'address' => $cart['adStreetAddress'],
 							'suburb' => $cart['adSuburb'],
 							'postcode' => $cart['adPostcode'],

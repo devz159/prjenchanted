@@ -61,3 +61,18 @@ if(! function_exists('_isAdvertiser')) {
 
 	}
 }
+
+if ( ! function_exists('isLocalEnv')) {
+	function isLocalEnv($env = '') {
+		$pattern = '/(?<=\/)localhost/';
+		$subject = base_url();
+		
+		if($env != '')
+			$subject = $env;
+		
+	if( ! preg_match($pattern, $subject))
+		return FALSE;
+		
+		return  TRUE;
+	}
+}

@@ -189,7 +189,7 @@ class Paypal extends CI_Controller  {
 								'receiver' => $payer_email,
 								'item_name' => $item_name
 					);
-					log_message("error", "Inserted record succesfully.");
+					// log_message("error", "Inserted record succesfully.");
 					$this->_sendPaypalEmail($data);
 				} else {
 					log_message('error', "FAILED INSERTING RECORD into orders table.");
