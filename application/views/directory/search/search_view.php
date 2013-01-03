@@ -42,26 +42,33 @@
                                 </ul>
                             </div>
                             <div class="search_panel clearfix">
-                            	<?php if(isset($serpscount)): ?>
-                                
-                                <?php endif; ?>
+                            <div id="searchbar">
+                    <?php echo form_open(base_url() . 'directory/search'); ?>
+                        <p><input type="text" name="searchquery" value="business title, description, location" />&nbsp;<button type="submit" >Search</button></p>
+                        <p class="advancesearch"><a href="#">advance search +</a></p>
+                    <?php echo form_close(); ?>
+                </div> 
                                 
                                 <?php $cntr = 0; ?>
                  <?php if(isset($serps)): ?>
                     <?php foreach($serps as $result): ?>
                             
                                 <div class="search_item clearfix">
-                                    <span class="searchNb">1.</span>
+                                    <span class="searchNb"><?php echo $cntr+1; ?>.</span>
                                     <div class="thumbnail pull-left">
-                                        <img alt="" src="http://placehold.it/80x80/efefef">
+                                    <?php if(getThumbImg($result->images) != ""): ?>
+	                                        <img src="<?php echo base_url(); ?>ads/<?php echo "$result->advr/thumbs/" . getThumbImg($result->images); ?>" />
+                                        <?php else: ?>
+                                        	<img src="<?php echo base_url() . "images/no_image_icon.jpg"; ?>" />
+                                        <?php endif; ?>
                                     </div>
                                     <div class="search_content">
                                         <h4>
-                                            <a href="javascript:void(0)" class="sepV_a">Lorem ipsum dolor sit amet</a>
+                                            <a lst_id="<?php echo $result->id; ?>" href="<?php echo base_url(); ?>directory/listing/details/overview/<?php echo $result->id; ?>" class="sepV_a ext_disabled"><?php echo $result->title; ?></a>
                                         </h4>
-                                        <p class="sepH_b item_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod commodo adipiscing. Nunc lobortis mauris sit amet lectus vulputate vitae porta nulla vehicula. Curabitur in fermentum dui. Integer lobortis odio in quam faucibus ornare. Vivamus sed nulla suscipit tortor volutpat aliquam. Ut a lorem in felis faucibus tincidunt. Duis consectetur pulvinar lacus non pulvinar. Phasellus tempor nisi at sem commodo id vehicula nisl aliquam.</p>
-                                        <p class="sepH_a"><strong>Lorem ipsum:</strong> dolor sit amet</p>
-                                        <small>Tag 1</small>, <small>Tag 2</small>
+                                        <p class="sepH_b item_description"><?php echo strTruncate(htmlDecode($result->description), 450); ?></p>
+                                        <p class="sepH_a"><strong>Categories:</strong> <?php echo getCategories($result->subcategory); ?></p>
+                                        <small><i class="splashy-map"></i> <?php echo strTruncate("$result->address, $result->postcode, $result->state, $result->country", 45); ?></small>, <small><i class="splashy-cellphone"></i> <?php echo $result->phone; ?></small>
                                     </div>
                                 </div>
                                 

@@ -1,0 +1,28 @@
+﻿DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_get_categories`; $$
+CREATE PROCEDURE `sp_get_categories`(IN arg_subcategories VARCHAR(255))
+
+BEGIN
+  DECLARE notfoundrecord INT DEFAULT 0;
+  DECLARE subcat VARCHAR(255) DEFAULT '';
+  DECLARE maincat VARCHAR(255) DEFAULT '';
+  DECLARE strCategories VARCHAR(255) DEFAULT '';
+  DECLARE curSubCategory CURSOR FOR SELECT s.sub_category, m.category FROM subcategories s LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id WHERE s.scat_id IN (arg_subcategories);
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET notfoundrecord = 1;
+
+  OPEN curSubCategory;
+
+  mainloop: WHILE(notfoundrecord = 0) DO
+
+    FETCH curSubCategory INTO subcat, maincat;
+
+    SET strCategories = CONCAT(strCategories, ';', '');
+
+  END WHILE mainloop;
+
+  CLOSE curSubCategory;
+
+END $$
+
+DELIMITER ;

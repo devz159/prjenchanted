@@ -11,7 +11,7 @@ if(! function_exists('getUser')) {
 	 * @version 1.0
 	 */
 	function getUser($email) {
-
+				
 		$CI =& get_instance();
 		$strQry = sprintf("SELECT * FROM vw_alluser WHERE email LIKE '%c%s%c'", 37, $email, 37);
 		$user = $CI->db->query($strQry)->result();
@@ -74,5 +74,30 @@ if ( ! function_exists('isLocalEnv')) {
 		return 0;
 		
 		return 1;
+	}
+}
+
+if(! function_exists('getCategories')) {
+	function getCategories($categories) {
+		// includes database.php
+		require APPPATH .'config/config.php';
+		
+		
+		$CI =& get_instance();
+		$strQry = sprintf("CALL sp_get_categories('%s', %s)", $categories, '@categories');
+		$baseurl = $config['base_url'] . 'directory/search/category/';
+		$strLink = '';
+		
+		$CI->db->query($strQry);
+		$links = $CI->db->query("SELECT @categories AS categories")->result();
+		
+		foreach ($links as $link) {
+			$strLink = $link->categories;
+		}
+		
+		$strLink = ($strLink != "")? preg_replace('/baseurl/', $baseurl, $strLink) : '';
+		
+		return $strLink;
+		
 	}
 }

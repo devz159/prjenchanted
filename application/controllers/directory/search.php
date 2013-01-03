@@ -60,7 +60,7 @@ class Search extends CI_Controller {
 			$strSearch = $_POST['searchquery'];
 			
 			//$params['querystring'] = "SELECT lst_id as id, title, description, address, phone FROM listing WHERE MATCH(title, description) AGAINST('" . $this->input->post('searchquery') . "') ORDER BY title DESC";
-			$params['querystring'] = "SELECT l.advr, l.lst_id as id, l.title AS `title`, l.description AS `description`, l.address AS `address`, l.phone AS `phone`, l.postcode AS `postcode`, l.images AS images, s.name AS `state`, c.name as `country` FROM ((listing l LEFT JOIN country c ON l.country=c.c_id)  INNER JOIN state s ON l.state=s.s_id ) WHERE ( MATCH(title, description) AGAINST('" . $this->input->post('searchquery') . "') AND l.status='1' AND l.expired='0') ORDER BY title DESC";
+			$params['querystring'] = "SELECT l.advr, l.lst_id as id, l.title AS `title`, l.description AS `description`, l.subcategory, l.address AS `address`, l.phone AS `phone`, l.postcode AS `postcode`, l.images AS images, s.name AS `state`, c.name as `country` FROM ((listing l LEFT JOIN country c ON l.country=c.c_id)  INNER JOIN state s ON l.state=s.s_id ) WHERE ( MATCH(title, description) AGAINST('" . $this->input->post('searchquery') . "') AND l.status='1' AND l.expired='0') ORDER BY title DESC";
 						
 			$this->load->model('mdldata');			
 			$this->mdldata->select($params);
@@ -77,7 +77,7 @@ class Search extends CI_Controller {
 		$db = $this->db->query("SELECT COUNT(mcat_id) AS `count`, mcat_id, maincategory FROM tmp_filtered_categ_count GROUP BY mcat_id");
 		$records = $db->result();
 		
-		// call_debug($records);
+		//call_debug($data['serps']);
 		
 		$data['sbsettings'] = $this->settings->readSideBar();
 // 		on_watch($data['sbsettings']);
@@ -213,4 +213,5 @@ class Search extends CI_Controller {
 		return $this->mdldata->_mRecords;
 	}
 	
+
 }
