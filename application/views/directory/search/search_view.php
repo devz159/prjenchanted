@@ -1,9 +1,9 @@
 <div class="row-fluid search_page">
                         <div class="span12">
-                            <h3 class="heading"><small>Search results for</small> Search term</h3>
+                            <h3 class="heading"><small>Search results for</small> <?php echo (isset($searchkeyword)) ? $searchkeyword: ''; ?></h3>
                             <div class="well clearfix">
                                 <div class="row-fluid">
-                                    <div class="pull-left">Showing 1 - 20 of 204 Results</div>
+                                    <div class="pull-left">Showing 1 - 20 of <?php echo (isset($serpscount)) ? $serpscount : ''; ?> <?php echo (isset($serpscount)) ? (($serpscount > 1) ? 'Results' : 'Result') : ''; ?></div>
                                     <div class="pull-right">
                                         <span class="sepV_c">
                                             Sort by:
@@ -42,12 +42,7 @@
                                 </ul>
                             </div>
                             <div class="search_panel clearfix">
-                            <div id="searchbar">
-                    <?php echo form_open(base_url() . 'directory/search'); ?>
-                        <p><input type="text" name="searchquery" value="business title, description, location" />&nbsp;<button type="submit" >Search</button></p>
-                        <p class="advancesearch"><a href="#">advance search +</a></p>
-                    <?php echo form_close(); ?>
-                </div> 
+                             
                                 
                                 <?php $cntr = 0; ?>
                  <?php if(isset($serps)): ?>

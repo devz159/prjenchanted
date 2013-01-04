@@ -89,80 +89,11 @@
             </div>
             
 			<!-- sidebar -->
-			<a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
-			<div class="sidebar">
-				<div class="antiScroll">
-					<div class="antiscroll-inner">
-						<div class="antiscroll-content">
-							<div class="sidebar_filters">
-								<h3>Keyword</h3>
-								<div class="filter_items">
-									<input type="text" class="input-medium"/>
-								</div>
-								<h3>Lorem ipsum</h3>
-								<div class="filter_items">
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-								</div>
-								<h3>Lorem ipsum</h3>
-								<div class="filter_items">
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Lorem ipsum dolor sit
-									</label>
-								</div>
-								<h3>Lorem ipsum</h3>
-								<div class="filter_items">
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										Under $25
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										$25 to $50
-									</label>
-									<label class="checkbox">
-										<input type="checkbox" value="filter_item" name="filter_item">
-										$100 to $200
-									</label>
-									<div class="form-inline">
-										<input type="text" placeholder="from" class="span1"> - <input type="text" placeholder="to" class="span1">
-									</div>
-								</div>
-								<a href="javascript:void(0)" class="btn btn-gebo">Search <i class="icon-chevron-right icon-white"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>            
+			<?php $this->load->view('includes/directory/sidebar'); ?>
             
-            <?php $this->view('includes/directory/footer'); ?>
+            <!-- footer -->
+            <?php $this->load->view('includes/directory/footer'); ?>
 		
 		</div>
 	</body>

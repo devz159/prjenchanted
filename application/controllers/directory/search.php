@@ -77,10 +77,9 @@ class Search extends CI_Controller {
 		$db = $this->db->query("SELECT COUNT(mcat_id) AS `count`, mcat_id, maincategory FROM tmp_filtered_categ_count GROUP BY mcat_id");
 		$records = $db->result();
 		
-		//call_debug($data['serps']);
 		
 		$data['sbsettings'] = $this->settings->readSideBar();
-// 		on_watch($data['sbsettings']);
+
 		$data['favorites'] = getFavItemsResultSet();		
 		$data['maincategories'] = $records;
 		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id WHERE l.status='1' AND l.expired='0' GROUP BY s.name")->result();
