@@ -268,9 +268,11 @@ class Listing extends CI_Controller {
 				/*$strQry = sprintf("UPDATE listing SET status='0', package='1', expired='0' WHERE lst_id=%d", $this->input->post('lst_id'));
 				$this->load->model('mdldata');
 				$params['querystring'] = $strQry;
-				if($this->mdldata->insert($params))
-					$this->_pay_paypal();*/
+				if($this->mdldata->insert($params))*/
+				
 				// this should post to PayPal for payment processing.
+				$this->_pay_paypal();
+				
 			}			
 		} 
 				
@@ -514,7 +516,7 @@ class Listing extends CI_Controller {
 		$this->mdldata->reset();
 		$this->mdldata->select($params);		
 		$data['listing'] = $this->mdldata->_mRecords;
-			
+		
 		$data['main_content'] = 'directory/listing/listing_repost_paypal';
 		$this->load->view('includes/directory/template_b', $data);
 		
