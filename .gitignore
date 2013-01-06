@@ -1,2 +1,7 @@
 # this is my ignore file list
 application/logs/*log-[0-9]*.php
+ads/[0-9]/*.jpg
+ads/[0-9]/*
+ads/[0-9]/thumbs/*.jpg
+uploaded/*
+uploaded/thumbs/*

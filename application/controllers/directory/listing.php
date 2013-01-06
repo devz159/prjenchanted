@@ -16,7 +16,7 @@ class Listing extends CI_Controller {
 		$this->load->library('favlist');		
 		$this->load->library('settings');
 		
-		fb::setEnabled(TRUE);
+		fb::setEnabled(true);
 	}
 	 
 	 public function index() {
@@ -366,6 +366,56 @@ class Listing extends CI_Controller {
 		return TRUE;
 	}
 	
+	public function testemail() {
+		$flag = TRUE;
+		$params = array();
+		
+		$subject = 'Congratulation You have successfully added your listing';
+		$msg = (array_key_exists('msg', $params)) ? $params['msg'] : 'My message';
+		$receiver = 'kenn_vall@yahoo.com';//$this->input->post('advr'); // @todo: remove hardcoded email add
+		$sender = 'webmaster@aus-directory.com'; // this should not be vacant
+		
+		// template data
+		$tpl = array(
+					'list_title' => 'some listing',//$params['adTitle'],
+					'year' => '2012',
+					'customer' => $this->_mFullName,
+					'site_url' => anchor(base_url("directory"), 'aus-newcastle', array('target' => "_blank"))
+				);
+		
+		$this->load->library('parser');
+		$msg = $this->parser->parse('includes/templates/payments/emailConfmStandaPayment_tpl', $tpl, TRUE);
+		
+		$config = array(
+			'sender' => $sender,
+  			'receiver' => $receiver,
+  			'from_name' => 'Newcastle-Hunter Directory', // OPTIONAL  // @todo: retrieve this from db			
+  			'subject' => $subject, // OPTIONAL
+  			'msg' => $msg , // OPTIONAL
+  			'email_temp_account' => isLocalEnv() //TRUE, // OPTIONAL. Uses your specified google account only. Please see this method "_tmpEmailAccount" below (line 111).  			
+		);
+		
+		$this->load->library('emailutil', $config);
+		
+		$bug = array(
+				'params' => $params,
+				'config' => $config,
+				'env' => isLocalEnv() . base_url()
+			);
+		
+		fb::log($bug, "listing->_sendListingEmail");
+		
+		
+		if($flag) {
+			if(! $this->emailutil->send()) {
+				echo $this->email->print_debugger();
+				return FALSE;
+			}
+		}
+		
+		return TRUE;
+	}
+
 	private function _new_pay_paypal() {
 		$this->load->library('cart');
 		$this->cart->show();

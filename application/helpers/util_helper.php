@@ -71,8 +71,8 @@ if ( ! function_exists('isLocalEnv')) {
 			$subject = $env;
 		
 	if( ! preg_match($pattern, $subject))
-		return FALSE;
+		return 0;
 		
-		return  TRUE;
+		return 1;
 	}
 }

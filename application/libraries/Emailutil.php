@@ -68,7 +68,7 @@ class Emailutil {
 		
 		if(array_key_exists('usersettings', $params))
 			$this->_mUserEmailSettings = TRUE;
-		
+		 
 		if(array_key_exists('email_temp_account', $params) && $params['email_temp_account'] == TRUE)
 			$this->_mEmailTemporary = TRUE;
 		
