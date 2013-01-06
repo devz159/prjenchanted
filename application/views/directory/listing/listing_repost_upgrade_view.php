@@ -16,7 +16,7 @@
     <input type="hidden" name="advr" value="<?php echo $advr; ?>" />
     <div class="signupbcrumbs"><ul><li><a href="#" onclick="history.go(-1); return false;">back</a></li><!--<li><a href="<?php echo base_url(); ?>directory/listing">start over</a></li>--></ul></div>    
         <h3>Package Type</h3>
-        <p class="forradbtn"><input type="radio" id="lststandard" name="listingtype" value="Standard" /><label for="lststandard">Standard Listing (FREE)</label></p>
+        <!--<p class="forradbtn"><input type="radio" id="lststandard" name="listingtype" value="Standard" /><label for="lststandard">Standard Listing (FREE)</label></p>-->
         <p class="forradbtn"><input type="radio" id="lstpremium" name="listingtype" checked="checked" value="Premium" /><label for="lstpremium">Premium Listing</label></p>
     <div id="packagetypebox">
         <p>Recurring Type</p>

@@ -16,7 +16,7 @@ class Listing extends CI_Controller {
 		$this->load->library('favlist');		
 		$this->load->library('settings');
 		
-		fb::setEnabled(true);
+		fb::setEnabled(false);
 	}
 	 
 	 public function index() {
@@ -265,15 +265,14 @@ class Listing extends CI_Controller {
 				$this->_upgrade_repost($this->input->post('lst_id'), $this->input->post('advr'));
 			} else {
 				// update listing using lst_id from inactive to pending				
-				$strQry = sprintf("UPDATE listing SET status='0', package='1', expired='0' WHERE lst_id=%d", $this->input->post('lst_id'));
+				/*$strQry = sprintf("UPDATE listing SET status='0', package='1', expired='0' WHERE lst_id=%d", $this->input->post('lst_id'));
 				$this->load->model('mdldata');
 				$params['querystring'] = $strQry;
 				if($this->mdldata->insert($params))
-					$this->_pay_paypal();
+					$this->_pay_paypal();*/
+				// this should post to PayPal for payment processing.
 			}			
-		} else { // standard package -- selected
-			$this->_reposted_free_listing();			
-		}
+		} 
 				
 	}
 	
@@ -368,7 +367,7 @@ class Listing extends CI_Controller {
 		return TRUE;
 	}
 	
-	public function testemail() {
+	private function _testemail() { // was public
 		$flag = TRUE;
 		$params = array();
 		
@@ -648,7 +647,7 @@ class Listing extends CI_Controller {
 		// USE Emailutil ON THIS PART
 		$subject = 'Congratulation You have successfully added your listing';
 		$msg = (array_key_exists('msg', $params)) ? $params['msg'] : 'My message';
-		$receiver = 'kenn_vall@yahoo.com';//$this->input->post('advr'); // @todo: remove hardcoded email add
+		$receiver = 'kenn_vall@yahoo.com';//$params['adEmail']; // @todo: change this when site is live
 		$sender = 'webmaster@aus-directory.com'; // this should not be vacant
 		
 		// template data
@@ -1000,7 +999,7 @@ class Listing extends CI_Controller {
 		
 	}
 	
-	public function test() {
+	private function _test() { // was public
 		$img = './ads/1/VrqBb1pQ5if528764d624db129b32c21fbca0cb8d6.jpg';
 		$data       = getimagesize($img);
 		
