@@ -227,8 +227,12 @@ class Listing extends CI_Controller {
 				// call custom email helper/library
 				$this->cart->show();
 				
-				$this->_sendListingEmail($this->cart->_mData);
+				// call_debug($this->cart->_mData, FALSE);
+				
+				if($this->_sendListingEmail($this->cart->_mData))
+					//on_watch(">>> Email sent... ");
 				//call_debug($params);
+				
 				// transfer uploaded images from 'uploaded' folder into 'ads' folder
 				// $this->imagemanager->manage($array, $source, $destination);
 				$this->load->library('imagemanager');
@@ -238,9 +242,7 @@ class Listing extends CI_Controller {
 				$this->imagemanager->manage($cart['adImages'], './uploaded/', './ads/' . $this->_getUserID() . '/');
 				
 			}
-			
-
-			
+						
 			// destroys all variables from the cart
 			$this->cart->end();
 			
@@ -647,7 +649,7 @@ class Listing extends CI_Controller {
 		$subject = 'Congratulation You have successfully added your listing';
 		$msg = (array_key_exists('msg', $params)) ? $params['msg'] : 'My message';
 		$receiver = 'kenn_vall@yahoo.com';//$this->input->post('advr'); // @todo: remove hardcoded email add
-		$sender = '';
+		$sender = 'webmaster@aus-directory.com'; // this should not be vacant
 		
 		// template data
 		$tpl = array(
@@ -673,10 +675,12 @@ class Listing extends CI_Controller {
 		
 		$bug = array(
 				'params' => $params,
-				'config' => $config
+				'config' => $config,
+				'env' => isLocalEnv() . base_url()
 			);
 		
 		fb::log($bug, "listing->_sendListingEmail");
+		
 		
 		if($flag) {
 			if(! $this->emailutil->send()) {
