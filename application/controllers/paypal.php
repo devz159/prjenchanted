@@ -301,7 +301,7 @@ class Paypal extends CI_Controller  {
 				
 				log_message('error', 'payment success... entering _insertOrders method');
 				
-				if($this->_updateOrder($_POST)) {
+				if($this->_insertOrders($_POST)) {
 					// send email payment confirmation
 					$data = array(
 								'receiver' => $payer_email,
@@ -319,11 +319,6 @@ class Paypal extends CI_Controller  {
 		}
 	}
 	
-	private function _updateOrder($param) {
-		
-		// updates the upgraded plan (item specific)
-		
-	}
 	
 	private function _isExist_paypal_trnx_id($id) {
 		
