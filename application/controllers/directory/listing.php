@@ -278,6 +278,33 @@ class Listing extends CI_Controller {
 				
 	}
 	
+public function validate_updgradeplan() {
+		// sentinel
+		authUser();
+		
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;
+		
+		if(isset($_POST['paypalaccnt'])) { // premium package -- selected
+			$validation->set_rules('paypalaccnt', 'Paypal Account', 'required');
+			
+			if($validation->run() === FALSE) {
+				$this->_upgradeplan($this->input->post('lst_id'), $this->input->post('advr'));
+			} else {
+				// update listing using lst_id from inactive to pending				
+				/*$strQry = sprintf("UPDATE listing SET status='0', package='1', expired='0' WHERE lst_id=%d", $this->input->post('lst_id'));
+				$this->load->model('mdldata');
+				$params['querystring'] = $strQry;
+				if($this->mdldata->insert($params))*/
+				
+				// this should post to PayPal for payment processing.
+				$this->_pay_paypal_upgrade();
+				
+			}			
+		} 
+				
+	}
+	
 	public function validate_login() {
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
@@ -356,7 +383,10 @@ class Listing extends CI_Controller {
 
 	public function upgrade() {
 		
-		$this->_upgrade_repost();
+		$lst_id = ($this->uri->segment(4) != "") ? $this->uri->segment(4) : '';
+		$advr = ($this->uri->segment(5) != "") ? $this->uri->segment(5) : '';
+		
+		$this->_upgradeplan($lst_id, $advr);
 		
 	}
 	
@@ -534,6 +564,16 @@ class Listing extends CI_Controller {
 		
 	}
 	
+	private function _upgradeplan($lst_id, $advr) {
+		
+		$data['list_id'] = $lst_id;		
+		$data['advr'] = $advr;
+		
+		//call_debug($data);
+		$data['main_content'] = 'directory/listing/listing_upgrade_plan_view';		
+		$this->load->view('includes/directory/template_b', $data);
+		
+	}
 		
 	public function details() {
 		
