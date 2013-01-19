@@ -35,7 +35,7 @@
         <input type="hidden" name="shipping_1" value="0.00">
         <input type="hidden" name="return" value="<?php echo base_url(); ?>paypal/thankyou">
         <input type="hidden" name="cancel_return" value="<?php echo base_url('directory/listing'); ?>">
-        <input type="hidden" name="notify_url" value="<?php echo base_url(); ?>paypal/process">
+        <input type="hidden" name="notify_url" value="<?php echo base_url(); ?>paypal/processupgrade">
         <input type="submit" name="pay_now" value="Place Order Through PayPal" />
     </form>
     <p>&nbsp;</p>
