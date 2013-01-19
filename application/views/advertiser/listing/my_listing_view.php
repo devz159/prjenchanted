@@ -23,7 +23,7 @@
                 <td class="number"><?php echo $list->pclicks; ?></td>
                 <td class="number"><?php echo $list->uclicks; ?></td>
                 <td class="number"><?php echo $list->enq; ?></td>
-                <td><a class="sprite editbtn hastooltip" lst_id="<?php echo $list->lst_id; ?>" tooltip="edit" href="<?php echo base_url() . 'advertiser/my/section/edit_list/' . $list->lst_id; ?>">&nbsp;</a> <a class="sprite deletebtn hastooltip" tooltip="delete" lst_id="<?php echo $list->lst_id; ?>" href="<?php echo base_url() . 'advertiser/my/section/active_list'; ?>">&nbsp;</a> <a class="sprite upgradebtn hastooltip<?php echo ($list->package == '1') ? ' premium' : ''; ?>" tooltip="<?php echo ($list->package == '1') ? 'premium - can\'t be upgraded' : 'upgrade to premium'; ?>" lst_id="<?php echo $list->lst_id; ?>" href="#">&nbsp;</a></td>
+                <td><a class="sprite editbtn hastooltip" lst_id="<?php echo $list->lst_id; ?>" tooltip="edit" href="<?php echo base_url() . 'advertiser/my/section/edit_list/' . $list->lst_id . '/' . $list->advr; ?>">&nbsp;</a> <a class="sprite deletebtn hastooltip" tooltip="delete" lst_id="<?php echo $list->lst_id; ?>" href="<?php echo base_url() . 'advertiser/my/section/active_list'; ?>">&nbsp;</a> <a class="sprite upgradebtn hastooltip<?php echo ($list->package == '1') ? ' premium' : ''; ?>" tooltip="<?php echo ($list->package == '1') ? 'premium - can\'t be upgraded' : 'upgrade to premium'; ?>" lst_id="<?php echo $list->lst_id; ?>" href="<?php echo ($list->package == '1') ? '#' : base_url('directory/listing/upgrade/' . $list->lst_id . '/' . $list->advr)?>">&nbsp;</a></td>
             </tr>
             <?php endforeach; ?>
             <tr class="datastatus">
