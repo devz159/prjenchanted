@@ -18,7 +18,8 @@ class Utility extends CI_Controller {
 	public function expireads() {
 		
 		// open orders table
-		$strQry = sprintf("SELECT SUBSTRING_INDEX(itemnumber, '-', 1) AS lst_id, itemnumber, email, amount, `status`, created_at, CURTIME() FROM orders o WHERE DATE(created_at)=CURDATE() AND (TIME(created_at)<=CURTIME())");
+		//$strQry = sprintf("SELECT SUBSTRING_INDEX(itemnumber, '-', 1) AS lst_id, itemnumber, email, amount, `status`, created_at, CURTIME() FROM orders o WHERE DATE(created_at)=CURDATE() AND (TIME(created_at)<=CURTIME())");
+		$this->db->query("CALL sp_expireads()");
 		
 		// retrieve all record that is expired on the day
 		// execute sp to expire all those ads
