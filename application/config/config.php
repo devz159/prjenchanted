@@ -374,7 +374,7 @@ $config['proxy_ips'] = '';
 /**
  * custom config
  */
-$config['gmailpassword'] = 'spidey';
+$config['gmailpassword'] = 'Kenneth_Myla152412';
 $config['email_receiver'] = 'kennva_1341307061_biz@gmail.com'; // paypal -- business email
 $config['currency_code'] = 'AUD';
 
