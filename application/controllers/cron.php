@@ -1,6 +1,6 @@
 <?php if(! defined('BASEPATH')) exit ('Direct script access not allowed');
 
-class Listings extends CI_Controller {
+class Cron extends CI_Controller {
 	
 	public function __construct() {
 		
@@ -13,7 +13,7 @@ class Listings extends CI_Controller {
 	
 	public function watchlists() {
 		log_message('error','watchlist cronjob succesfully executed.');
-
+		
 		// checks listing and advertiser_listing tables. include orders table too
 		// listing table is where you expire the ad
 	}
