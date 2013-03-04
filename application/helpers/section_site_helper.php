@@ -183,4 +183,48 @@
 		}
 	}
 	
+	if (! function_exists('getSection')) {
+	function getSection() {
+		
+		$CI =& get_instance();
+		$section = '';
+		$sought = '';
+		$uri = uri_string();
+		
+		// generic
+		$sought =  $CI->uri->segment(1);
+		
+		switch($sought) {
+			case 'home':
+				$section = 'home';
+				break;
+				
+			case 'admin':
+				$section = 'admin';
+				break;
+				
+			case 'master':
+				$section = 'master';
+				break;
+				
+			case 'reports':
+				$section = 'reports';
+				break;
+
+			case 'accident':
+				$section = 'accident';
+				break;
+				
+			default:
+				$section = 'home';
+		}
+		
+		// specific
+		
+		// special
+		
+		return $section;
+	}
+}
+	
 ?>

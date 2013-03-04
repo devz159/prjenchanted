@@ -16,13 +16,40 @@ class Search extends CI_Controller {
 // 		call_debug($this->settings->showall());
 	}
 	
+	public function index() {
+		$this->section();
+	}
+	
+	public function section() {
+		
+		$section = ($this->uri->segment(4)) ? $this->uri->segment(4) : '';
+		
+		switch($section) {
+			case 'search':
+				$this->search();
+				break;
+				
+			case 'search_categories':
+				$this->search_categories();
+				break;
+			
+			case 'search_location':
+				$this->search_location();
+				break;
+				
+			default:
+				$this->search();
+		}
+		
+	}
+	
 	public function my_signout() {
 		$params = array('advr_uname', 'advr_islog', 'advr_fullname');
 		$this->sessionbrowser->destroy($params);
 		redirect(base_url() . 'directory/search');
 	}
 	
-	public function index() {
+	public function search() {
 			
 		// gets the currently logged in user
 		$this->_getUser();
@@ -130,8 +157,9 @@ class Search extends CI_Controller {
 		
 		$data['sbsettings'] = $this->settings->readSideBar();
 		$data['favorites'] = getFavItemsResultSet();
-		$data['maincategories'] = $records;
+		$data['maincategories'] = $records;		
 		$data['locations'] = $this->db->query("SELECT COUNT(s.name) AS count, s.s_id, s.code, s.name FROM listing l LEFT JOIN state s ON l.state=s.s_id WHERE l.status='1' AND l.expired='0' GROUP BY s.name")->result();
+		
 		$data['main_content'] = 'directory/search/search_view';
 		$this->load->view('includes/directory/template', $data);
 		

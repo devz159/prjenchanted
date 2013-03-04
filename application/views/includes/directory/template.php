@@ -1,203 +1,169 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<meta name="url" content="<?php echo base_url();?>" />
-<link rel="shortcut icon" href="<?php echo base_url(); ?>images/favicon.ico" />
-<?php getHeader(); ?>
-
-</head>
-
-<body>
-<div id="header">
-	<div class="middle">
-    	<div class="teaser">
-        	<p>Make your business visible on the internet and this is the right place to list it online.</p>
-        </div>
-                
-        <div class="loginmenucontainer">
-        	<div class="popuplogin">
-	<div class="sprite calloutpointer"></div>
-	<?php echo form_open(base_url()); ?>
-    	
-        <p><label>Username</label> <input class="required" type="text" name="uname" /></p>
-        <p><label>Password</label> <input class="required" type="password" name="pword" /></p>
-        <p><a href="#" onClick="return false;">Forgot password?</a> &nbsp; <input class="popuploginbtn" type="submit" value="Login" /></p>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="url" content="<?php echo base_url();?>" />
+		<link rel="shortcut icon" href="<?php echo base_url(); ?>images/favicon.ico" />
         
-    <?php echo form_close(); ?>
-</div>
-        	<ul id="loginmenu">
-				<?php if($user != ''): ?>
-                	<li class="firstchild"><a href=""><span class="yellow">Not</span> <?php echo $user; ?>?</a>
-                    	<ul>
-                        	<li><a href="<?php echo base_url() . 'advertiser/my'; ?>">Goto My Account</a></li>
-                            <li><a href="<?php echo base_url() . 'advertiser/my/section/active_list'; ?>">My Active Listing</a></li>
-                            <li><a href="<?php echo base_url() . 'directory/search/my_signout'; ?>">Sign-out</a></li>
-                        </ul>
-                    </li>
-                    
-                <?php else: ?>
-                	<li class="firstchild"><a id="signinlnk" href="<?php echo base_url(); ?>login">Sign-in</a></li>
-                <?php endif; ?>
-            	<?php if($user == ''): ?>
-                <li class="lastchild"><a href="<?php echo base_url() . 'directory/register'; ?>">Register</a></li>
-                <?php endif; ?>
-            </ul>
-        </div><div class="clearthis"></div>
-    </div>
-</div>
-
-<div class="middle">
-	
+        <?php $this->view('includes/directory/header'); ?>
+        
+    </head>
     
-</div>
-
-<div class="middle">
-<div id="comlogo">
-        	<img src="<?php echo base_url(); ?>images/companylogo.png" />
-        </div>
-<div class="calltoaction">
-            <div><a class="sprite ctabox" href="<?php echo base_url(); ?>directory/listing"><span class="sprite"></span>List your business</a></div>
-        </div><div class="clearthis"></div>
-
-<div id="left">
-        
-        
-        <?php if(viewSearchBar()): ?>
-            <div class="sprite module searchbar">
-                <div>
-                    <h2><span class="sprite"></span>Search</h2>
-                    <?php echo form_open(base_url() . "directory/search"); ?>
-                        <p><input type="text" name="searchquery" value="business title, description, location" /></p><p><button class="submitsearchbtn" type="submit" >Search</button></p>
-                        <p class="advancesearch"><a href="#">advance search +</a></p>
-                    <?php echo form_close(); ?>
+    <body>
+		<div id="loading_layer" style="display:none"><img src="<?php echo base_url('theme/img/ajax_loader.gif'); ?>" alt="" /></div>
+		<div class="style_switcher">
+			<div class="sepH_c">
+				<p>Colors:</p>
+				<div class="clearfix">
+					<a href="javascript:void(0)" class="style_item jQclr blue_theme style_active" title="blue">blue</a>
+					<a href="javascript:void(0)" class="style_item jQclr dark_theme" title="dark">dark</a>
+					<a href="javascript:void(0)" class="style_item jQclr green_theme" title="green">green</a>
+					<a href="javascript:void(0)" class="style_item jQclr brown_theme" title="brown">brown</a>
+					<a href="javascript:void(0)" class="style_item jQclr eastern_blue_theme" title="eastern_blue">eastern blue</a>
+					<a href="javascript:void(0)" class="style_item jQclr tamarillo_theme" title="tamarillo">tamarillo</a>
+				</div>
+			</div>
+			<div class="sepH_c">
+				<p>Backgrounds:</p>
+				<div class="clearfix">
+					<span class="style_item jQptrn style_active ptrn_def" title=""></span>
+					<span class="ssw_ptrn_a style_item jQptrn" title="ptrn_a"></span>
+					<span class="ssw_ptrn_b style_item jQptrn" title="ptrn_b"></span>
+					<span class="ssw_ptrn_c style_item jQptrn" title="ptrn_c"></span>
+					<span class="ssw_ptrn_d style_item jQptrn" title="ptrn_d"></span>
+					<span class="ssw_ptrn_e style_item jQptrn" title="ptrn_e"></span>
+				</div>
+			</div>
+			<div class="sepH_c">
+				<p>Layout:</p>
+				<div class="clearfix">
+					<label class="radio inline"><input type="radio" name="ssw_layout" id="ssw_layout_fluid" value="" checked /> Fluid</label>
+					<label class="radio inline"><input type="radio" name="ssw_layout" id="ssw_layout_fixed" value="gebo-fixed" /> Fixed</label>
+				</div>
+			</div>
+			<div class="sepH_c">
+				<p>Sidebar position:</p>
+				<div class="clearfix">
+					<label class="radio inline"><input type="radio" name="ssw_sidebar" id="ssw_sidebar_left" value="" checked /> Left</label>
+					<label class="radio inline"><input type="radio" name="ssw_sidebar" id="ssw_sidebar_right" value="sidebar_right" /> Right</label>
+				</div>
+			</div>
+			<div class="sepH_c">
+				<p>Show top menu on:</p>
+				<div class="clearfix">
+					<label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_click" value="" checked /> Click</label>
+					<label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_hover" value="menu_hover" /> Hover</label>
+				</div>
+			</div>
+			
+			<div class="gh_button-group">
+				<a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
+				<a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
+			</div>
+			<div class="hide">
+				<ul id="ssw_styles">
+					<li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
+					<li class="small ssw_lColor sepH_a" style="display:none">a { color: #<span></span> }</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="maincontainer" class="clearfix">
+			<!-- header -->
+            <header>
+                <?php $this->load->view('includes/directory/navigation'); ?>                
+            </header>
+            
+            <!-- main content -->
+            <div id="contentwrapper">
+                <div class="main_content">
+                    
+                    <nav>
+                        <?php $this->load->view('includes/directory/bcrumbs'); ?>   
+                    </nav>
+                    
+                    <?php $this->load->view($main_content); ?>
+                        
                 </div>
             </div>
-        <?php endif; ?>
-        
-        <div class="sprite module categories">
-        	<div ctrltag="1" class="sprite controlbox <?php echo (1 == (1 & $sbsettings)) ? '' : 'controlboxcollapsed'; ?>"></div>
-        	<h2><span class="sprite"></span>Categories</h2>
-            <ul <?php echo (1 == (1 & $sbsettings)) ? '' : 'class="ulcontrolboxcollapsed"'; ?>>
-            	<?php if(isset($maincategories)): ?>
-                	<?php foreach($maincategories as $mcateg): ?>
-						<li>
-                        	<a href="<?php echo base_url(); ?>directory/search/search_categories/<?php echo $mcateg->mcat_id . '/' . url_title($mcateg->maincategory, 'underscore', TRUE);?>">
-                            	<?php echo $mcateg->maincategory; ?> <em>(<?php echo $mcateg->count; ?>)</em>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-            	<li><a href="#">Acccommodation & Travel <em>(130)</em></a></li>
-				<li><a href="#">Adult <em>(30)</em></a></li>
-				<li><a href="#">Art, Drama, & Music <em>(110)</em></a></li>
-				<li><a href="#">Automotive & Marine <em>(170)</em></a></li>
-				<li><a href="#">Beauty <em>(130)</em></a></li>
-				<li><a href="#">Building & Construction <em>(14)</em></a></li>
-				<li><a href="#">Business & Professional (<em>114)</em></a></li>
-				<li><a href="#">Coumputer & Internet Services <em>(145)</em></a></li>
-				<li><a href="#">Education & Tuition <em>(1)</em></a></li>
-				<li><a href="#">Finance <em>(130)</em></a></li>
-				<li><a href="#">Food & Dining <em>(13)</em></a></li>
-                <?php endif; ?>
-            </ul>
-        </div>
-        
-        <div class="sprite module locations">
-        	<div ctrltag="2" class="sprite controlbox <?php echo (2 == (2 & $sbsettings)) ? '' : 'controlboxcollapsed'; ?>"></div>
-        	<h2><span class="sprite"></span>Locations</h2>
             
-            <ul <?php echo (2 == (2 & $sbsettings)) ? '' : 'class="ulcontrolboxcollapsed"'; ?>>
-            	<?php if(isset($locations)): ?>
-                	<?php foreach($locations as $loc): ?>
-                		<li>
-                        	<a href="<?php echo base_url() . 'directory/search/search_location/' . $loc->s_id . '/' . url_title($loc->name, 'underscore', TRUE); ?>"><?php echo $loc->code; ?> <em>(<?php echo $loc->count; ?>)</em></a>                        </li>                    
-                    <?php endforeach; ?>
-                <?php else: ?>                
-                    <li><a href="#">NSW <em>(5)</em></a></li>
-                    <li><a href="#">QLD <em>(2560)</em></a></li>
-                    <li><a href="#">VIC <em>(3)</em></a></li> 
-                <?php endif; ?>
-            </ul>
-        </div>
-        
-        <div class="sprite module additional">
-        	<div ctrltag="4" class="sprite controlbox <?php echo (4 == (4 & $sbsettings)) ? '' : 'controlboxcollapsed'; ?>"></div>
-        	<h2><span class="sprite"></span>Additional</h2>
-            <ul <?php echo (4 == (4 & $sbsettings)) ? '' : 'class="ulcontrolboxcollapsed"'; ?>>
-            	<li><a href="#">No recents searches</a></li>
-            </ul>
-        </div>
-        
-        <div class="sprite module favorites">
-        	<div ctrltag="8" class="sprite controlbox <?php echo (8 == (8 & $sbsettings)) ? '' : 'controlboxcollapsed'; ?>"></div>
-        	<h2><span class="sprite"></span>Favorites</h2>
+			<!-- sidebar -->
+			<a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
+			<div class="sidebar">
+				<div class="antiScroll">
+					<div class="antiscroll-inner">
+						<div class="antiscroll-content">
+							<div class="sidebar_filters">
+								<h3>Keyword</h3>
+								<div class="filter_items">
+									<input type="text" class="input-medium"/>
+								</div>
+								<h3>Lorem ipsum</h3>
+								<div class="filter_items">
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+								</div>
+								<h3>Lorem ipsum</h3>
+								<div class="filter_items">
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Lorem ipsum dolor sit
+									</label>
+								</div>
+								<h3>Lorem ipsum</h3>
+								<div class="filter_items">
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										Under $25
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										$25 to $50
+									</label>
+									<label class="checkbox">
+										<input type="checkbox" value="filter_item" name="filter_item">
+										$100 to $200
+									</label>
+									<div class="form-inline">
+										<input type="text" placeholder="from" class="span1"> - <input type="text" placeholder="to" class="span1">
+									</div>
+								</div>
+								<a href="javascript:void(0)" class="btn btn-gebo">Search <i class="icon-chevron-right icon-white"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
             
-            <ul <?php echo (8 == (8 & $sbsettings)) ? '' : 'class="ulcontrolboxcollapsed"'; ?>>
-            <?php if(isset($favorites)): ?>
-		<?php foreach($favorites as $fav): ?>
-            
-            <li><a href="<?php echo base_url() . 'directory/listing/details/overview/' . $fav->lst_id; ?>"><span></span><?php echo strTruncate($fav->title, 30); ?></a> <a lst_id="<?php echo $fav->lst_id; ?>" class="removefavsb" href="#">»remove</a></li>
-        
-        <?php endforeach; ?>
-    <?php else: ?>
-    	<li><p><strong>No items found in your favorite list.</strong></p></li>
-    <?php endif; ?>
-    
-            	
-            </ul>
-            
-        </div>
-        <p>&nbsp;</p>
-    </div>
-       
-	
-    <div class="menucontainer">
-        	<ul id="menu">
-            	<li><a class="selected" href="#">Home</a></li>
-                <li><a href="#">Destinations</a></li>
-                <li><a href="#">Things to Do</a>
-                	<ul>
-                    	<li><a href="#">Things to do one</a></li>
-                        <li><a href="#">Things to do two</a></li>
-                        <li><a href="#">Things to do three</a></li>
-                        <li><a href="#">Things to do four</a></li>
-                        <li><a href="#">Things to do five</a></li>
-                        <li><a href="#">Things to do six</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Tourist Information</a>
-                	<ul>
-                    	<li><a href="#">Tourist Info One</a></li>
-                        <li><a href="#">Tourist Info Two</a></li>
-                        <li><a href="#">Tourist Info Three</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">Directory</a></li>
-            </ul>
-        </div>
-    
-    
-    <div id="container">
-    	
-        <div class="pane">
-        	<div class="sprite menuselector"></div>
-        	<div class="topproundcorner"></div>
-            
-            <div class="innercontent"><!-- innercontent --> 
-            	<?php $this->load->view($main_content); ?>
-               
-			</div><!-- innercontent -->            
-            <div class="bottomroundcorner"></div>
-        </div> 
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-    </div>    
-</div>
-
-<div class="clearthis"></div>
-<?php getFooter(); ?>
-<div class="tooltipbox hide"></div>
-</body>
+            <?php $this->view('includes/directory/footer'); ?>
+		
+		</div>
+	</body>
 </html>
