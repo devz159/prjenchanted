@@ -1,4 +1,4 @@
-<div id="jCrumbs" class="breadCrumb module">
+<!--<div id="jCrumbs" class="breadCrumb module">
                             <ul>
                                 <li>
                                     <a href="#"><i class="icon-home"></i></a>
@@ -19,4 +19,4 @@
                                     Telescope 3735SX 
                                 </li>
                             </ul>
-                        </div>
+                        </div>-->

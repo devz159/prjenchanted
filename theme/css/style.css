@@ -249,6 +249,12 @@
         .search_page .box_view .item_description {max-height:92px;overflow:hidden}
         .search_page .box_view .label {position:absolute;top:-9px;right:-6px}
         
+		/* kpv added settings */
+		.search_page .box_view p.sepH_a {display:none;}
+		.search_page .box_view .mncFlagView {display:none; clear:both;}
+		/*.search_page .box_view .mncFav_btn {text-align:right;}*/
+		/*********************/
+		
         .sidebar_filters {padding:30px 30px 20px}
         .sidebar_filters h3 {font-size:13px;color:#067EAD}
         .sidebar_filters .filter_items {padding:5px 10px 10px;margin-bottom:10px;border-bottom:1px dashed #ccc}

@@ -234,12 +234,13 @@ $(function(){
 
 			$.post(domainName + 'ajax/favorites/add', {id: $curElem.attr('lst_id')})
 			.success(function(data) {
-				$curElem.addClass('favcached removefavoritesbtn').html('<span class="sprite"></span>remove - favorites').removeClass('favoritesbtn')
+				$curElem.addClass('favcached removefavoritesbtn').html('<i class="splashy-star_full"></i> remove-favorites').removeClass('favoritesbtn')
 				.unbind('click')
 				.bind('click', removeFav);
 				
 				// adds fav item on sb
 				//addfavitemsb($curElem.attr('lst_id'), $curElem.attr('adtitle'));
+
 				$('.favorites ul').empty().append(data);
 				
 				$('.favorites .removefavsb').each(function(i){		
@@ -256,7 +257,7 @@ $(function(){
 
 			$.post(domainName + 'ajax/favorites/remove', {id: $curElem.attr('lst_id')})
 			.success(function(data) {
-				$curElem.removeClass('favcached removefavoritesbtn').html('<span class="sprite"></span>add to favorites')
+				$curElem.removeClass('favcached removefavoritesbtn').html('<i class="splashy-star_empty"></i> add to favorites')
 				.unbind('click')
 				.bind('click', addFav);
 				
@@ -293,7 +294,7 @@ $(function(){
 			});
 			
 			// removes fav it from the serpsbox
-			$('.serpsbox .favcached').each(function(i){
+			$('.search_panel .favcached').each(function(i){
 				faviconserpsbox = $(this);
 				
 				if(faviconserpsbox.attr('lst_id') == $curElem.attr('lst_id'))

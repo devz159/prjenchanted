@@ -1,14 +1,14 @@
 <div class="navbar navbar-fixed-top">
                     <div class="navbar-inner">
                         <div class="container-fluid">
-                            <a class="brand" href="dashboard.html"><i class="icon-home icon-white"></i> Gebo Admin</a>
+                            <a class="brand" href="dashboard.html"><i class="icon-home icon-white"></i> aus-newcastle.com</a>
                             <ul class="nav user_menu pull-right">
-                                <li class="hidden-phone hidden-tablet">
+                                <!--<li class="hidden-phone hidden-tablet">
                                     <div class="nb_boxes clearfix">
                                         <a data-toggle="modal" data-backdrop="static" href="#myMail" class="label ttip_b" title="New messages">25 <i class="splashy-mail_light"></i></a>
                                         <a data-toggle="modal" data-backdrop="static" href="#myTasks" class="label ttip_b" title="New tasks">10 <i class="splashy-calendar_week"></i></a>
                                     </div>
-                                </li>
+                                </li>-->
                                 <li class="divider-vertical hidden-phone hidden-tablet"></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Johny Smith <b class="caret"></b></a>
@@ -20,7 +20,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="nav" id="mobile-nav">
+                            <!--<ul class="nav" id="mobile-nav">
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-list-alt icon-white"></i> Forms <b class="caret"></b></a>
 									<ul class="dropdown-menu">
@@ -89,7 +89,7 @@
 								<li>
 									<a href="documentation.html"><i class="icon-book icon-white"></i> Help</a>
 								</li>
-							</ul>
+							</ul>-->
                         </div>
                     </div>
                 </div>

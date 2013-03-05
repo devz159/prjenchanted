@@ -39,8 +39,20 @@
                                     </ul>
 								</div>
 								<h3><i class="splashy-star_boxed_full"></i> Favorites</h3>
-								<div class="filter_items">
-									
+								<div class="filter_items favorites">
+									<ul class="list_a">
+            <?php if(isset($favorites)): ?>
+		<?php foreach($favorites as $fav): ?>
+            
+            <li><a class="ext_disabled" href="<?php echo base_url() . 'directory/listing/details/overview/' . $fav->lst_id; ?>"><span></span><?php echo strTruncate($fav->title, 30); ?></a> <a lst_id="<?php echo $fav->lst_id; ?>" class="removefavsb ttip_r" title="remove-favorites" placeholder="right center" href="#"> <i class="splashy-tag_remove"></i></a></li>
+        
+        <?php endforeach; ?>
+    <?php else: ?>
+    	<li><p><strong>No items found in your favorite list.</strong></p></li>
+    <?php endif; ?>
+    
+            	
+            </ul>
 								</div>
 								                  
 						  </div>

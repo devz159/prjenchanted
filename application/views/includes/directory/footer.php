@@ -29,7 +29,10 @@
             
             <!-- search page functions -->
             <script src="<?php echo base_url('theme/js/gebo_search.js'); ?>"></script>
-    
+    		
+            <!-- utility -->
+            <script type="text/javascript" src="<?php echo base_url('js/utility.js');?>"></script>
+            
 			<script>
 				$(document).ready(function() {
 					//* show all elements & remove preloader
