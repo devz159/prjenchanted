@@ -10,7 +10,7 @@
                                 <div class="row-fluid">
                                     <div class="pull-left">Showing <?php echo getPositionPagination(7, (isset($offset_num_rows)? $offset_num_rows : 0)); ?> of <?php echo (isset($serpscount)) ? $serpscount : ''; ?> <?php echo (isset($serpscount)) ? (($serpscount > 1) ? 'Results' : 'Result') : ''; ?></div>
                                     <div class="pull-right">
-                                        <span class="sepV_c">
+                                        <!--<span class="sepV_c">
                                             Sort by:
                                             <select>
                                                 <option>Name</option>
@@ -25,7 +25,7 @@
                                                 <option>25</option>
                                                 <option>50</option>
                                             </select>
-                                        </span>
+                                        </span>-->
                                         <span class="result_view">
 											<a href="javascript:void(0)" class="box_trgr sepV_b"><i class="icon-th-large"></i></a>
 											<a href="javascript:void(0)" class="list_trgr"><i class="icon-align-justify"></i></a>
