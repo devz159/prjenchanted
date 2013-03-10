@@ -16,7 +16,7 @@
                 </div>
                     
                         <hr />
-                        <div class="serpslabel"><div class="leftcol"><p><span class="strong black"><?php echo $serpscount . ' ' . (($serpscount > 1)? 'results' : 'result'); ?></span> <span class="grey">for "</span><span class="strong black"><?php echo $searchkeyword; ?></span><span>"<!--</span> <span>(page 1 of 3)</span>--></p></div><div class="rightcol"><p><label>sort by </label><select name="sorting">
+                        <div class="serpslabel"><div class="leftcol"><p><span class="strong black"><?php echo $serpscount . ' ' . (($serpscount > 1)? 'results' : 'result'); ?></span> <span class="grey">for "</span><span class="strong black"><?php echo $searchkeyword; ?></span><!--</span> <span>(page 1 of 3)</span>--></p></div><div class="rightcol"><p><label>sort by </label><select name="sorting">
                             <option value="relevance">relevance</option>
                             <option value="Recent">recent</option>
                         </select></p></div></div><div class="clearthis"></div>

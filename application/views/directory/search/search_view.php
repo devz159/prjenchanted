@@ -1,9 +1,14 @@
 <div class="row-fluid search_page">
 	<div class="span12">
 		<h3 class="heading"><small>Search results for</small> <?php echo (isset($searchkeyword)) ? $searchkeyword: ''; ?></h3>
+        	
+        	<?php 
+				if(isset($serpscount)): 
+					if($serpscount > 0): ?>
+            
                             <div class="well clearfix">
                                 <div class="row-fluid">
-                                    <div class="pull-left">Showing 1 - 20 of <?php echo (isset($serpscount)) ? $serpscount : ''; ?> <?php echo (isset($serpscount)) ? (($serpscount > 1) ? 'Results' : 'Result') : ''; ?></div>
+                                    <div class="pull-left">Showing <?php echo getPositionPagination(7, (isset($offset_num_rows)? $offset_num_rows : 0)); ?> of <?php echo (isset($serpscount)) ? $serpscount : ''; ?> <?php echo (isset($serpscount)) ? (($serpscount > 1) ? 'Results' : 'Result') : ''; ?></div>
                                     <div class="pull-right">
                                         <span class="sepV_c">
                                             Sort by:
@@ -28,24 +33,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pagination">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li class="disabled"><a href="#">...</a></li>
-                                    <li><a href="#">10</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
-                            </div>
+                           	<?php echo (isset($paginate)) ? $paginate : '' ; ?>		
+			<?php 
+					endif;
+				endif; ?>
 			<div class="search_panel clearfix">
                              
                                 
                  <?php $cntr = 0; ?>
                  <?php if(isset($serps)): ?>
+                 	<?php if($serpscount > 0): ?>
                     <?php foreach($serps as $result): ?>                            
 						<div class="search_item clearfix">
                                     <span class="searchNb"><?php echo $cntr+1; ?>.</span>
@@ -89,8 +86,15 @@
 						</div>
                         <?php $cntr++; ?>
                     <!-- end loop here-->
-					<?php endforeach; ?>            
+					<?php endforeach; ?> 
+                    
+                    <?php else: ?>
+                    	<h2 class="heading">No records found</h2>
+                    <?php endif; ?>           
 			</div>
+            <?php if($serpscount > 0): ?>
+            	<?php echo (isset($paginate)) ? $paginate : '' ; ?>	
+			<?php endif; ?>
 	</div>
 				
                 <?php endif; ?>     

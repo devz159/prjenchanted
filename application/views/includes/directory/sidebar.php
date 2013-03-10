@@ -17,7 +17,7 @@
                                 <?php if(isset($maincategories)): ?>
                 	<?php foreach($maincategories as $mcateg): ?>
 						<li>
-                        	<a class="ext_disabled" href="<?php echo base_url(); ?>directory/search/search_categories/<?php echo $mcateg->mcat_id . '/' . url_title($mcateg->maincategory, 'underscore', TRUE);?>">
+                        	<a class="ext_disabled" href="<?php echo base_url(); ?>directory/search/section/search_categories/<?php echo $mcateg->mcat_id . '/' . url_title($mcateg->maincategory, 'underscore', TRUE);?>">
                             	<?php echo $mcateg->maincategory; ?> <em>(<?php echo $mcateg->count; ?>)</em>
                             </a>
                         </li>
@@ -33,7 +33,7 @@
                                     	<?php if(isset($locations)): ?>
                 	<?php foreach($locations as $loc): ?>
                 		<li>
-                        	<a class="ext_disabled" href="<?php echo base_url() . 'directory/search/search_location/' . $loc->s_id . '/' . url_title($loc->name, 'underscore', TRUE); ?>"><?php echo $loc->code; ?> <em>(<?php echo $loc->count; ?>)</em></a>                        </li>                    
+                        	<a class="ext_disabled" href="<?php echo base_url() . 'directory/search/section/search_location/' . $loc->s_id . '/' . url_title($loc->name, 'underscore', TRUE); ?>"><?php echo $loc->code; ?> <em>(<?php echo $loc->count; ?>)</em></a>                        </li>                    
                     <?php endforeach; ?>
                 <?php endif; ?>                
                                     </ul>

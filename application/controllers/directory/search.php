@@ -11,9 +11,7 @@ class Search extends CI_Controller {
 		
 		$this->_mFullName;
 		$this->_mUserName = '';
-		//echo $this->googleadsense->test();
-		//die();
-// 		call_debug($this->settings->showall());
+		
 	}
 	
 	public function index() {
@@ -68,7 +66,7 @@ class Search extends CI_Controller {
 
 			$data['serpscount'] = $this->mdldata->_mRowCount;
 			$data['searchkeyword'] = $this->input->post('searchquery');
-			
+							
 		}			
 
 		// $this->db->query('CALL sp_categories_count()');
@@ -76,6 +74,7 @@ class Search extends CI_Controller {
 		// $db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;');
 		$db = $this->db->query("SELECT COUNT(mcat_id) AS `count`, mcat_id, maincategory FROM tmp_filtered_categ_count GROUP BY mcat_id");
 		$records = $db->result();
+		
 		
 		
 		$data['sbsettings'] = $this->settings->readSideBar();
@@ -89,8 +88,8 @@ class Search extends CI_Controller {
 	
 	public function search_location () {
 		
-		$idLoc = $this->uri->segment(4);
-		$nameLoc = $this->uri->segment(5);
+		$idLoc = $this->uri->segment(5);
+		$nameLoc = $this->uri->segment(6);
 		
 		// gets the currently logged in user
 		$this->_getUser();
@@ -98,7 +97,7 @@ class Search extends CI_Controller {
 		
 		$strQry = sprintf("SELECT  l.advr, l.lst_id as id, l.title AS `title`, l.description AS `description`, l.subcategory, l.address AS `address`, l.phone AS `phone`, l.postcode AS `postcode`, l.images AS images, s.name AS `state`, c.name as `country` FROM ((listing l LEFT JOIN country c ON l.country=c.c_id)  INNER JOIN state s ON l.state=s.s_id ) WHERE state=%d AND l.status='1' AND l.expired='0'", $idLoc);
 		$params['querystring'] = $strQry; 
-					
+		
 		$this->load->model('mdldata');			
 		$this->mdldata->select($params);
 		$data['serps'] = $this->mdldata->_mRecords;
@@ -106,9 +105,14 @@ class Search extends CI_Controller {
 		$data['serpscount'] = $this->mdldata->_mRowCount;
 		//call_debug($data['serpscount']);
 		$data['searchkeyword'] = $nameLoc;
-			
-
-		// $this->db->query('CALL sp_categories_count()');
+		
+		/* pagination */
+		$this->load->library('pagination');		
+		$tmpArr = generatePagination(base_url('directory/search/section/search_location/' . $idLoc . '/' . $nameLoc . '/'), $strQry, 7);		
+		$data['serps'] = $tmpArr['serps'];
+		$data['paginate'] = $tmpArr['paginate'];
+		$data['offset_num_rows'] = $tmpArr['numrows'];
+		
 		$this->db->query('CALL sp_filtered_categories_count()');
 		// $db = $this->db->query('SELECT COUNT(m.mcat_id) AS `count`, m.mcat_id, s.sub_category AS `subcategory`, m.category AS `maincategory` FROM ((tmpcateg_count t LEFT JOIN subcategories s ON t.subcategories=s.scat_id) LEFT JOIN maincategories m ON s.mcat_id=m.mcat_id) GROUP BY m.category;'); // @neefixme: need to change the criteria. include the status='2' and expired='1'
 		$db = $this->db->query("SELECT COUNT(mcat_id) AS `count`, mcat_id, maincategory FROM tmp_filtered_categ_count GROUP BY mcat_id");
@@ -125,8 +129,8 @@ class Search extends CI_Controller {
 	
 	public function search_categories () {
 
-		$idCateg = $this->uri->segment(4);
-		$nameCateg = $this->uri->segment(5);
+		$idCateg = $this->uri->segment(5);
+		$nameCateg = $this->uri->segment(6);
 		
 		// gets the currently logged in user
 		$this->_getUser();
@@ -163,19 +167,13 @@ class Search extends CI_Controller {
 		$this->load->view('includes/directory/template', $data);
 		
 	}
-	
 
-/* 	public function index() {
-		
-		$this->load->view('home/search_page_view');
-		
-	}
-	 */
 	public function test() {
 		//$this->load->view("directory/search/autocomplete_view");
 		
 		//$arr = $this->db->query("CALL sp_search('australia')")->result();
 		
+		/*
 		$this->load->model('mdldata');
 		$params = array('australia');
 		//$params = array('fname' => 'Megan');
@@ -184,7 +182,17 @@ class Search extends CI_Controller {
 		$arr = $this->mdldata->_mRecords;
 		
 		call_debug($arr);
+		*/
 		
+		$this->load->library('pagination');
+
+		$config['base_url'] = 'http://localhost/newcastle/directory/search/test/';
+		$config['total_rows'] = 200;
+		$config['per_page'] = 20;
+		
+		$this->pagination->initialize($config);
+		
+		echo $this->pagination->create_links();
 	}
 	
 	private function _getUser() {
