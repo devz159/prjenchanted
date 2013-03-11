@@ -30,6 +30,9 @@
             <!-- search page functions -->
             <script src="<?php echo base_url('theme/js/gebo_search.js'); ?>"></script>
     		
+            <!-- notifications functions -->
+            <script src="<?php echo base_url('theme/js/gebo_notifications.js'); ?>"></script>
+            
             <!-- utility -->
             <script type="text/javascript" src="<?php echo base_url('js/utility.js');?>"></script>
             

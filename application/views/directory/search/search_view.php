@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="search_content">
                                         <h4>
-                                            <a lst_id="<?php echo $result->id; ?>" href="<?php echo base_url(); ?>directory/listing/details/overview/<?php echo $result->id; ?>" class="sepV_a ext_disabled"><?php echo $result->title; ?></a>
+                                            <a data-toggle="modal" lst_id="<?php echo $result->id; ?>" href="#pageDetail" class="sepV_a ext_disabled"><?php echo $result->title; ?></a>
                                         </h4>
                                         <p class="sepH_b item_description"><?php echo strTruncate(htmlDecode($result->description), 450); ?></p>
                                         <p class="sepH_a"><strong>Categories: </strong> <?php echo getCategories($result->subcategory); ?></p>                                        <div class="row-fluid">
@@ -77,7 +77,7 @@
 									echo ($infav) ? 'class="favcached removefavoritesbtn"' : 'class="favoritesbtn"';
 								?>
                                 
-                                class="favoritesbtn"
+                                
                                 
                                  href="#"><?php echo ($infav) ? '<i class="splashy-star_full"></i> remove-favorites' : '<i class="splashy-star_empty"></i> add to favorites'; ?></a></small>
                                             </div>
@@ -99,6 +99,16 @@
 				
                 <?php endif; ?>     
 </div>
-
-                    
+<div class="modal hide fade" id="pageDetail">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal">×</button>
+        <h3>Listing Details</h3>
+    </div>
+    <div class="modal-body">
+    	
+    </div><!-- modal body-->
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+</div>
 

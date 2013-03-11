@@ -563,6 +563,21 @@ $(function(){
 			return false;
 	}
 	
+	$('a[lst_id]').click(function() {
+		elemID = $(this).attr('lst_id');
+		
+		$('.modal-body').empty().append('<div id="loading_layer" ><img src="' + domainName + 'theme/img/ajax_loader.gif" alt="" /></div>');
+		//$('#loading_layer').css({display: 'block'});
+		// alert("You've clicked me => " +  elem);
+		$.post(domainName + 'ajax/ajxlistingdetails/retrieveListingDetails',{listID: elemID})
+		.success(function(data){
+			
+			$('.modal-body').empty().append(data);
+		});
+		
+	}); 
+	
+	
 	/*********************************
 	/***  some utility functions   ***
 	/*********************************

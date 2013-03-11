@@ -12,7 +12,13 @@ class Ajxlistingdetails extends CI_Controller {
 		$this->load->view('ajax/ajxlisting_details_menu_tab', $data);
 		
 	}
-
+	
+	public function retrieveListingDetails() {
+		$listId = $this->input->post('listID');
+		$strQry = sprintf("SELECT * FROM listing WHERE lst_id=%d", $listId);
+		
+		$this->load->view('ajax/ajxlisting_details_view');
+	}
 	
 	
 }

@@ -19,18 +19,17 @@ class Login extends CI_Controller {
 		$this->advertiser();
 	}
 
-	public function admin() {
-
+	public function admin($error = '') {
+		
+		$data['error'] = $error;
 		$data['main_content'] = 'login/admin/admin_login_view';
 		$this->load->view('includes/login/template', $data);
 
 	}
 
-	public function advertiser() {
+	public function advertiser($error = '') {
 
-		if(isset($this->_mMyLoginError))
-		$data['accnterror'] = TRUE;
-
+		$data['error'] = $error;
 		$data['main_content'] = 'login/advertiser/advertiser_login_view';
 		$this->load->view('includes/login/template', $data);
 	}
@@ -39,23 +38,18 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
 
-		$validation->set_rules('uname', 'Username',  'required');
-		$validation->set_rules('pword', 'Password', 'required');
-
-		//call_debug($_POST);
+		$validation->set_rules('username', 'Username',  'required');
+		$validation->set_rules('password', 'Password', 'required');
 
 		if($validation->run() === FALSE) {
 			$this->admin();
 		} else {
 			if($this->__isAdminExists()) {
 				$params = array(
-						'admin_uname' => $this->input->post('uname'),
+						'admin_uname' => $this->input->post('username'),
 						'admin_islog' => TRUE,
 						'admin_fullname' => $this->_mfullname
 				);
-
-				// loads the sessionbrowser
-				//$this->load->library('sessionbrowser');
 
 				$this->sessionbrowser->setInfo($params);
 
@@ -63,17 +57,12 @@ class Login extends CI_Controller {
 				$this->sessionbrowser->getInfo($params);
 				$arr = $this->sessionbrowser->mData;
 
-				//call_debug($arr);
-
-				//change the admin's login status to TRUE
-				$this->_toggleLogIn('1', $this->input->post('uname'), TRUE);
-
-				//call_debug($_POST);
+				$this->_toggleLogIn('1', $this->input->post('username'), TRUE);
 
 				redirect(base_url() . 'admin/panel');
 
 			} else {
-				$this->admin();
+				$this->admin("Username and password doesn't match");
 			}
 
 		}
@@ -84,8 +73,8 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
 
-		$validation->set_rules('uname', 'Username',  'required');
-		$validation->set_rules('pword', 'Password', 'required');
+		$validation->set_rules('username', 'Username',  'required');
+		$validation->set_rules('password', 'Password', 'required');
 
 
 		// 		call_debug($_POST);
@@ -95,7 +84,7 @@ class Login extends CI_Controller {
 			// stores currently loggedin user into sessionbrowser's sessoin variables
 			if($this->_isUserExists()) {
 				$params = array(
-									'advr_uname' => $this->input->post('uname'),
+									'advr_uname' => $this->input->post('username'),
 									'advr_islog' => TRUE,
 									'advr_fullname' => $this->_mfullname
 				);
@@ -103,13 +92,13 @@ class Login extends CI_Controller {
 				$this->sessionbrowser->setInfo($params);
 
 				//change the advertiser's login status to TRUE
-				$this->_toggleLogIn('1', $this->input->post('uname'), FALSE);
+				$this->_toggleLogIn('1', $this->input->post('username'), FALSE);
 					
 				redirect(base_url() . 'advertiser/my');
 
 			} else {
 				$this->_mMyLoginError = TRUE;
-				$this->advertiser();
+				$this->advertiser("Username and password doesn't match");
 			}
 
 		}
@@ -367,7 +356,7 @@ class Login extends CI_Controller {
 	 */
 	private function _isUserExists() {
 
-		$params = array('table' => array('name' => 'advertiser', 'criteria_phrase' => 'username="' . $this->input->post('uname') . '" and password="' . md5($this->input->post('pword')) .'"'));
+		$params = array('table' => array('name' => 'advertiser', 'criteria_phrase' => 'username="' . $this->input->post('username') . '" and password="' . md5($this->input->post('password')) .'"'));
 
 		$this->load->model('mdldata');
 		$this->mdldata->select($params);
@@ -385,7 +374,7 @@ class Login extends CI_Controller {
 
 	private function __isAdminExists() {
 
-		$strQry = sprintf("SELECT * FROM `user` WHERE uname='%s' AND pword='%s'", $this->input->post('uname'), MD5($this->input->post('pword')));
+		$strQry = sprintf("SELECT * FROM `user` WHERE uname='%s' AND pword='%s'", $this->input->post('username'), MD5($this->input->post('password')));
 
 		$this->load->model('mdldata');
 		$params['querystring'] = $strQry;
